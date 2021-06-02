@@ -2,39 +2,39 @@
 
 
 
-    <div class="row">
-        <h1 class="text-center">Edit Campground</h1>
-        <div class="col-6 offset-3">
+    <div style="direction: rtl;" class="row">
+        <h1 style="direction: rtl;" class="text-center">ویرایش کمپ</h1>
+        <div style="direction: rtl;" class="col-6 offset-3">
             <form class="validated-form" action="/campgrounds/<%= campground._id %>?_method=PUT " method="POST"
                 novalidate>
-                <div class="mb-3">
-                    <label class="form-label" for="title">Title</label>
+                <div style="direction: rtl;" class="mb-3">
+                    <label style="direction: rtl;" class="form-label" for="title">عنوان</label>
                     <input class="form-control" type="text" name="campground[title]" id="title"
                         value="<%=campground.title %>" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label" for="location">Location</label>
+                <div style="direction: rtl;" class="mb-3">
+                    <label style="direction: rtl;" class="form-label" for="location">مکان</label>
                     <input class="form-control" type="text" name="campground[location]" id="location"
                         value="<%= campground.location %>" required>
-                    <div class="valid-feedback">
+                    <div style="direction: rtl;" class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label" for="image">Image URL</label>
+                <div style="direction: rtl;" class="mb-3">
+                    <label style="direction: ltr;" class="form-label" for="image">برای عکس url</label>
                     <input class="form-control" type="text" name="campground[image]" id="image"
                         value="<%= campground.image %>" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label" for="price">Campground Price</label>
+                <div style="direction: rtl;" class="mb-3">
+                    <label style="direction:rtl;" class="form-label" for="price">قیمت کمپ</label>
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="Price-label">$</span>
+                        <span style="direction: rtl;" class="input-group-text " id="Price-label">&#65020;</span>
                         <input type="text" class="form-control" placeholder="0.00" aria-label="Price"
                             aria-describedby="price-label" id="price" name="campground[price]"
                             value="<%= campground.price %>" required>
@@ -43,19 +43,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label" for="description">Description</label>
+                <div style="direction: rtl;" class="mb-3">
+                    <label style="direction: rtl;" class="form-label" for="description">توضیحات</label>
                     <textarea class="form-control" type="text" name="campground[description]" id="description"
                         required> <%= campground.description %> </textarea>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
-                <div class="mb-3">
-                    <button class="btn btn-info">Update Campground</button>
+                <div style="direction: rtl;" class="mb-3">
+                    <button style="direction: rtl;" class="btn btn-info">ویرایش کمپ</button>
 
                 </div>
             </form>
-            <a href="/campgrounds/<%= campground._id %> ">Back To Campground</a>
+            <a class="mb-4" style="direction: rtl;" href="/campgrounds/<%= campground._id %> ">بازگشت به کمپ</a>
         </div>
     </div>
