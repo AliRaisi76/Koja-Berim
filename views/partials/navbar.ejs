@@ -9,15 +9,16 @@
             <div class="navbar-nav">
                 <a class="nav-link" href="/">صفحه اصلی</a>
                 <a class="nav-link" href="/campgrounds">کمپ ها</a>
-                <a class="nav-link" href="/campgrounds/new">کمپ های جدید</a>
+                <a class="nav-link" href="/campgrounds/new">ایجاد کمپ جدید</a>
             </div>
             <!-- // Yadet bashe bootstrap 5 be baad dige ml-auto kar nemikone. alan ms-auto bayad bashe! -->
-            <div class="navbar-nav ms-auto">
+            <!-- baraye rast be chap neveshtan bayad az re-auto estefade konin! -->
+            <div class="navbar-nav me-auto">
                 <% if(!currentUser) { %>
-                    <a class="nav-link" href="/login">Login</a>
-                    <a class="nav-link" href="/register">Register</a>
+                    <a class="nav-link" href="/login">ورود</a>
+                    <a class="nav-link" href="/register">ثبت نام</a>
                 <% }else { %>
-                    <a class="nav-link" href="/logout">Logout</a>
+                    <a class="nav-link" href="/logout">خروج</a>
                 <% } %>
             </div>
         </div>

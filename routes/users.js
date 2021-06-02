@@ -32,7 +32,7 @@ router.get('/login', (req, res) => {
 })
 
 router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), async (req, res) => {
-    req.flash('success', 'Welcome back!')
+    req.flash('success', 'خوش برگشتین!')
     const redirectUrl = req.session.returnTo || '/campgrounds'
     delete req.session.returnTo
     res.redirect(redirectUrl)
@@ -40,7 +40,7 @@ router.post('/login', passport.authenticate('local', { failureFlash: true, failu
 
 router.get('/logout', (req, res) => {
     req.logOut()
-    req.flash('success', 'Goodbye!')
+    req.flash('success', 'خدانگهدار!')
     res.redirect('/campgrounds')
 })
 

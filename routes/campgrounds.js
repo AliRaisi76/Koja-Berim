@@ -47,13 +47,8 @@ router.post('/', validateCampground, isLoggedIn, catchAsync(async (req, res, nex
 // show route. show details of a particular camp
 router.get('/:id', catchAsync(async (req, res) => {
     const campground = await Campground.findById(req.params.id).populate('reviews')
-<<<<<<< HEAD
-    if (!campground) {
-        req.flash('error', 'Cannot find that campground!')
-=======
     if(!campground){
         req.flash('error', 'کمپ مورد نظر پیدا نشد !')
->>>>>>> a9b930cdaab8f2ece765fc8a4f0b2518e9010fca
         return res.redirect('/campgrounds')
     }
     res.render('campgrounds/show', { campground })
@@ -62,13 +57,8 @@ router.get('/:id', catchAsync(async (req, res) => {
 // to the page of editing a campground
 router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
     const campground = await Campground.findById(req.params.id)
-<<<<<<< HEAD
-    if (!campground) {
-        req.flash('error', 'Cannot find that campground!')
-=======
     if(!campground){
         req.flash('error', 'کمپ مورد نظر پیدا نشد !')
->>>>>>> a9b930cdaab8f2ece765fc8a4f0b2518e9010fca
         return res.redirect('/campgrounds')
     }
     res.render('campgrounds/edit', { campground })
