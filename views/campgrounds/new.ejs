@@ -1,10 +1,10 @@
 <% layout('layouts/boilerplate') %>
     <div class="row">
-        <h1 class="text-center">New Campground</h1>
+        <h1 style="direction: rtl;" class="text-center">کمپ جدید</h1>
         <div class="col-6 offset-3">
             <form action="/campgrounds" method="POST" novalidate class="validated-form">
                 <div class="mb-3">
-                    <label class="form-label" for="title">Title</label>
+                    <label style="direction: rtl;" class="form-label" for="title">عنوان</label>
                     <input class="form-control" type="text" name="campground[title]" id="title" required>
                     <div class="valid-feedback">
                         Looks good!
@@ -12,23 +12,23 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label" for="location">Location</label>
+                    <label style="direction: rtl;" class="form-label" for="location"> مکان</label>
                     <input class="form-control" type="text" name="campground[location]" id="location" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="image">Image URL</label>
+                    <label style="direction: ltr;" class="form-label" for="image">برای عکس url</label>
                     <input class="form-control" type="text" name="campground[image]" id="image" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="price">Campground Price</label>
+                    <label style="direction: rtl;" class="form-label" for="price">هزینه کمپ</label>
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="Price-label">$</span>
+                        <span class="input-group-text" id="Price-label">&#65020;</span>
                         <input type="text" class="form-control" placeholder="0.00" aria-label="Price"
                             aria-describedby="price-label" id="price" name="campground[price]" required>
                         <div class="valid-feedback">
@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="description">Description</label>
+                    <label style="direction: rtl;" class="form-label" for="description">توضیحات</label>
                     <textarea class="form-control" type="text" name="campground[description]"
                         id="description" required></textarea>
                     <div class="valid-feedback">
@@ -45,11 +45,11 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <button class="btn btn-success">Add Campground</button>
+                    <button style="direction: rtl;" class="btn btn-success">اضافه کردن کمپ</button>
 
                 </div>
             </form>
-            <a href="/campgrounds">All Campgrounds</a>
+            <a style="direction: rtl;" class="btn btn-outline-info mb-3" href="/campgrounds">تمام کمپ ها</a>
         </div>
     </div>
 

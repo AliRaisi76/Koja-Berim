@@ -39,7 +39,7 @@ router.get('/new', isLoggedIn, (req, res) => {
 router.post('/', validateCampground, isLoggedIn, catchAsync(async (req, res, next) => {
     const campground = new Campground(req.body.campground)
     await campground.save()
-    req.flash('success', 'Successfully made a new campground!')
+    req.flash('success', 'با موفقیت یک کمپ جدید ایجاد شد ! ')
     res.redirect(`/campgrounds/${campground._id}`)
 }))
 
@@ -47,8 +47,13 @@ router.post('/', validateCampground, isLoggedIn, catchAsync(async (req, res, nex
 // show route. show details of a particular camp
 router.get('/:id', catchAsync(async (req, res) => {
     const campground = await Campground.findById(req.params.id).populate('reviews')
+<<<<<<< HEAD
     if (!campground) {
         req.flash('error', 'Cannot find that campground!')
+=======
+    if(!campground){
+        req.flash('error', 'کمپ مورد نظر پیدا نشد !')
+>>>>>>> a9b930cdaab8f2ece765fc8a4f0b2518e9010fca
         return res.redirect('/campgrounds')
     }
     res.render('campgrounds/show', { campground })
@@ -57,8 +62,13 @@ router.get('/:id', catchAsync(async (req, res) => {
 // to the page of editing a campground
 router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
     const campground = await Campground.findById(req.params.id)
+<<<<<<< HEAD
     if (!campground) {
         req.flash('error', 'Cannot find that campground!')
+=======
+    if(!campground){
+        req.flash('error', 'کمپ مورد نظر پیدا نشد !')
+>>>>>>> a9b930cdaab8f2ece765fc8a4f0b2518e9010fca
         return res.redirect('/campgrounds')
     }
     res.render('campgrounds/edit', { campground })
@@ -68,7 +78,7 @@ router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
 router.put('/:id', isLoggedIn, validateCampground, catchAsync(async (req, res) => {
     const { id } = req.params
     const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground })
-    req.flash('success', 'Successfully updated campground!')
+    req.flash('success', 'کمپ با موفقیت ویرایش شد !')
 
     res.redirect(`/campgrounds/${campground._id}`)
 }))
@@ -78,7 +88,7 @@ router.put('/:id', isLoggedIn, validateCampground, catchAsync(async (req, res) =
 router.delete('/:id', isLoggedIn, catchAsync(async (req, res) => {
     const { id } = req.params
     await Campground.findByIdAndDelete(id)
-    req.flash('success', 'Successfully deleted campground!')
+    req.flash('success', 'کمپ با موفقیت حذف شد !')
 
     res.redirect('/campgrounds')
 }))
