@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Koja Berim</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -11,6 +11,16 @@
                 <a class="nav-link" href="/campgrounds">Campgrounds</a>
                 <a class="nav-link" href="/campgrounds/new">New Campground</a>
             </div>
+            <!-- // Yadet bashe bootstrap 5 be baad dige ml-auto kar nemikone. alan ms-auto bayad bashe! -->
+            <div class="navbar-nav ms-auto">
+                <% if(!currentUser) { %>
+                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link" href="/register">Register</a>
+                <% }else { %>
+                    <a class="nav-link" href="/logout">Logout</a>
+                <% } %>
+            </div>
         </div>
+
     </div>
 </nav>
