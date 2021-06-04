@@ -1,8 +1,49 @@
+const { campgroundSchema, reviewSchema } = require('./schemas')
+const ExpressError = require('./utils/ExpressError')
+const Campground = require('./models/campground')
+
+
 module.exports.isLoggedIn = (req, res, next) => {
-    if(!req.isAuthenticated()){
+    if (!req.isAuthenticated()) {
         req.session.returnTo = req.originalUrl
-        req.flash('error', 'You must be signed in first!')
+        req.flash('error', 'ابتدا باید وارد حساب کاربریتان شوید!')
         return res.redirect('/login')
     }
     next()
 }
+
+
+
+// middleware to validate the campground information passed thriugh the request body
+module.exports.validateCampground = (req, res, next) => {
+    const { error } = campgroundSchema.validate(req.body)
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg, 400)
+    } else {
+        next()
+    }
+}
+
+module.exports.isAuthor = async (req, res, next) => {
+    const { id } = req.params
+    const campground = await Campground.findById(id)
+    if (!campground.author.equals(req.user._id)) {
+        req.flash('error', 'شما اجازه انجام این کار را ندارید!')
+        return res.redirect(`/campgrounds/${id}`)
+    }
+    next()
+}
+
+
+// middleware of validating the review request body 
+module.exports.validateReview = (req, res, next) => {
+    const { error } = reviewSchema.validate(req.body)
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg, 400)
+    } else {
+        next()
+    }
+}
+
