@@ -18,7 +18,7 @@
                     <li style="direction: rtl;" class="list-group-item text-muted fa fa-map-marker">
                         <%= campground.location %>
                     </li>
-                    <li style="direction: rtl;" class="list-group-item fa fa-map-marker">
+                    <li style="direction: rtl;" class="list-group-item fa">
                         ارسال شده توسط:<%= campground.author.username %>
                     </li>
                     <!-- yadet bashe 3 ta sefre jeloye Toman to bardari -->
@@ -63,11 +63,13 @@
                 <div style="direction: rtl;" class="card mb-3">
                     <div style="direction: rtl;" class="card-body">
                         <h5 style="direction: rtl;" class="card-title"> امتیاز: <%= review.rating %></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">توسط: <%=  %> </h6>
+                        <h6 class="card-subtitle mb-2 text-muted">توسط: <%= review.author.username %> </h6>
                         <p style="direction: rtl;" class="card-text">کامنت: <%= review.body %></p>
+                        <% if(currentUser && review.author.equals(currentUser._id)) { %>
                         <form action="/campgrounds/<%= campground._id %>/reviews/<%=review._id%>?_method=DELETE" method="POST">
                             <button style="direction: rtl;" class="btn btn-sm btn-danger">حذف</button>
                         </form>
+                        <% } %> 
                     </div>
                 </div>
             <% } %>
