@@ -1,4 +1,5 @@
 <% layout('layouts/boilerplate') %>
+    <link rel="stylesheet" href="/stylesheets/stars.css">
 
     <div class="row">
         <div class="col-6">
@@ -18,61 +19,89 @@
                     <li style="direction: rtl;" class="list-group-item text-muted fa fa-map-marker">
                         <%= campground.location %>
                     </li>
-                    <li style="direction: rtl;" class="list-group-item fa">
+                    <li style="direction: rtl;" class="list-group-item">
                         ارسال شده توسط:<%= campground.author.username %>
                     </li>
                     <!-- yadet bashe 3 ta sefre jeloye Toman to bardari -->
-                    <li style="direction: rtl;" class="list-group-item "> هزینه ورود: <%= campground.price %>000 تومان </li>
+                    <li style="direction: rtl;" class="list-group-item "> هزینه ورود: <%= campground.price %>000 تومان
+                    </li>
                 </ul>
-                <% if(currentUser && campground.author.equals(currentUser._id)) { %> 
-                <div style="direction: rtl;" class="card-body">
-                    <a style="direction: rtl;" class="card-link btn btn-info" href="/campgrounds/<%= campground._id %>/edit">ویرایش</a>
-                    <form style="direction: rtl;" class="d-inline" action="/campgrounds/<%=campground._id%>?_method=DELETE " method="POST">
-                        <button style="direction: rtl;" class="btn btn-danger">حذف</button>
-                    </form>
-                </div>
-                <% } %> 
-                <div class="card-footer text-muted">
-                    2 days ago
-                </div>
+                <% if(currentUser && campground.author.equals(currentUser._id)) { %>
+                    <div style="direction: rtl;" class="card-body">
+                        <a style="direction: rtl;" class="card-link btn btn-info"
+                            href="/campgrounds/<%= campground._id %>/edit">ویرایش</a>
+                        <form style="direction: rtl;" class="d-inline"
+                            action="/campgrounds/<%=campground._id%>?_method=DELETE " method="POST">
+                            <button style="direction: rtl;" class="btn btn-danger">حذف</button>
+                        </form>
+                    </div>
+                    <% } %>
+                        <div class="card-footer text-muted">
+                            2 days ago
+                        </div>
             </div>
             <!-- &#65020; -->
 
         </div>
         <div style="direction: rtl;" class="col-6">
-            <% if(currentUser) { %> 
-            <h2>گذاشتن کامنت</h2>
-            <form action="/campgrounds/<%= campground._id %>/reviews" method="POST" class="mb-3 validated-form"
-                novalidate>
-                <div style="direction: rtl;" class="mb-3">
+            <% if(currentUser) { %>
+                <h2>گذاشتن کامنت</h2>
+                <form action="/campgrounds/<%= campground._id %>/reviews" method="POST" class="mb-3 validated-form"
+                    novalidate>
+                    <!-- <div style="direction: rtl;" class="mb-3">
                     <label style="direction: rtl;" class="form-label" for="rating">امتیاز</label>
-                    <!-- emtiaz dehi az chap be rast shod baraye estefade rahat tare nomreh dehi -->
+                    emtiaz dehi az chap be rast shod baraye estefade rahat tare nomreh dehi
                     <input style="direction: ltr;" class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
-                </div>
-                <div  style="direction: rtl;" class="mb-3">
-                    <label class="form-label" for="body">کامنت</label>
-                    <textarea style="direction: rtl;" class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
-                    <div class="valid-feedback">
-                        Looks good!
+                </div> -->
+                    <div class="mb-3">
+                        <fieldset class="starability-basic">
+                            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1"
+                                checked aria-label="No rating." />
+                            <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                            <label for="first-rate1" title="Terrible">1 star</label>
+                            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                            <label for="first-rate2" title="Not good">2 stars</label>
+                            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                            <label for="first-rate3" title="Average">3 stars</label>
+                            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                            <label for="first-rate4" title="Very good">4 stars</label>
+                            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                            <label for="first-rate5" title="Amazing">5 stars</label>
+                        </fieldset>
                     </div>
-                </div>
-                <button style="direction: rtl;" class="btn btn-success">تایید</button>
-            </form>
-            <% } %> 
-            <% for(let review of campground.reviews) { %>
-                <div style="direction: rtl;" class="card mb-3">
-                    <div style="direction: rtl;" class="card-body">
-                        <h5 style="direction: rtl;" class="card-title"> امتیاز: <%= review.rating %></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">توسط: <%= review.author.username %> </h6>
-                        <p style="direction: rtl;" class="card-text">کامنت: <%= review.body %></p>
-                        <% if(currentUser && review.author.equals(currentUser._id)) { %>
-                        <form action="/campgrounds/<%= campground._id %>/reviews/<%=review._id%>?_method=DELETE" method="POST">
-                            <button style="direction: rtl;" class="btn btn-sm btn-danger">حذف</button>
-                        </form>
-                        <% } %> 
+                    <div style="direction: rtl;" class="mb-3">
+                        <label class="form-label" for="body">کامنت</label>
+                        <textarea style="direction: rtl;" class="form-control" name="review[body]" id="body" cols="30"
+                            rows="3" required></textarea>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
                     </div>
-                </div>
-            <% } %>
+                    <button style="direction: rtl;" class="btn btn-success">تایید</button>
+                </form>
+                <% } %>
+                    <% for(let review of campground.reviews) { %>
+                        <div style="direction: rtl;" class="card mb-3">
+                            <div style="direction: rtl;" class="card-body">
+                                <h5 style="direction: rtl;" class="card-title">
+                                    <%= review.author.username %>
+                                </h5>
+                                <p class="starability-result" data-rating="<%= review.rating %>">
+                                    Rated: <%= review.rating %> stars
+                                </p>
+                                <!-- <h6 class="card-subtitle mb-2 text-muted">توسط:  </h6> -->
+                                <p style="direction: rtl;" class="card-text">کامنت: <%= review.body %>
+                                </p>
+                                <% if(currentUser && review.author.equals(currentUser._id)) { %>
+                                    <form
+                                        action="/campgrounds/<%= campground._id %>/reviews/<%=review._id%>?_method=DELETE"
+                                        method="POST">
+                                        <button style="direction: rtl;" class="btn btn-sm btn-danger">حذف</button>
+                                    </form>
+                                <% } %>
+                            </div>
+                        </div>
+                    <% } %>
         </div>
     </div>
     <!-- review.author.username -->
