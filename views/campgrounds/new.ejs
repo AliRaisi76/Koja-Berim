@@ -2,7 +2,7 @@
     <div class="row">
         <h1 style="direction: rtl;" class="text-center">کمپ جدید</h1>
         <div class="col-6 offset-3">
-            <form action="/campgrounds" method="POST" novalidate class="validated-form">
+            <form action="/campgrounds" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label style="direction: rtl;" class="form-label" for="title">عنوان</label>
                     <input class="form-control" type="text" name="campground[title]" id="title" required>
@@ -18,13 +18,14 @@
                         Looks good!
                     </div>
                 </div>
-                <div class="mb-3">
+                
+                <!-- <div class="mb-3">
                     <label style="direction: ltr;" class="form-label" for="image">برای عکس url</label>
                     <input class="form-control" type="text" name="campground[image]" id="image" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
-                </div>
+                </div> -->
                 <div class="mb-3">
                     <label style="direction: rtl;" class="form-label" for="price">هزینه کمپ</label>
                     <div class="input-group mb-3">
@@ -43,6 +44,10 @@
                     <div class="valid-feedback">
                         Looks good!
                     </div>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">انتخاب عکس</label>
+                    <input class="form-control" name="image" type="file" id="image" multiple>
                 </div>
                 <div class="mb-3">
                     <button style="direction: rtl;" class="btn btn-success">اضافه کردن کمپ</button>

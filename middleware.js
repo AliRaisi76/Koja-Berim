@@ -7,7 +7,6 @@ const Review = require('./models/review')
 module.exports.isLoggedIn = (req, res, next) => {
     if (!req.isAuthenticated()) {
         req.session.returnTo = req.originalUrl
-        console.log(req.session.returnTo)
         req.flash('error', 'ابتدا باید وارد حساب کاربریتان شوید!')
         return res.redirect('/login')
     }
