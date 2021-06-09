@@ -2,6 +2,12 @@
     <div class="row">
         <h1 style="direction: rtl;" class="text-center">کمپ جدید</h1>
         <div class="col-6 offset-3">
+
+
+            <div id="map"></div>
+            <pre id="coordinates" class="coordinates"></pre>
+
+            
             <form action="/campgrounds" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label style="direction: rtl;" class="form-label" for="title">عنوان</label>
@@ -18,7 +24,7 @@
                         Looks good!
                     </div>
                 </div>
-                
+
                 <!-- <div class="mb-3">
                     <label style="direction: ltr;" class="form-label" for="image">برای عکس url</label>
                     <input class="form-control" type="text" name="campground[image]" id="image" required>
@@ -39,8 +45,8 @@
                 </div>
                 <div class="mb-3">
                     <label style="direction: rtl;" class="form-label" for="description">توضیحات</label>
-                    <textarea class="form-control" type="text" name="campground[description]"
-                        id="description" required></textarea>
+                    <textarea class="form-control" type="text" name="campground[description]" id="description"
+                        required></textarea>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -57,5 +63,3 @@
             <a style="direction: rtl;" class="btn btn-outline-info mb-3" href="/campgrounds">تمام کمپ ها</a>
         </div>
     </div>
-
-    

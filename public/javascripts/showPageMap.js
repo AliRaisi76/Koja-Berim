@@ -1,4 +1,5 @@
 mapboxgl.accessToken = mapToken
+mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.0/mapbox-gl-rtl-text.js')
 const map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/streets-v11', // style URL
@@ -6,6 +7,7 @@ const map = new mapboxgl.Map({
     zoom: 10 // starting zoom
 })
 
+map.addControl(new mapboxgl.NavigationControl())
 
 new mapboxgl.Marker()
     .setLngLat(campground.geometry.coordinates)

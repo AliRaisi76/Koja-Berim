@@ -1,10 +1,13 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWxpcmFpc2kiLCJhIjoiY2tuano4ZmY1MDY2bjJvcG1tMGdyZDFpMSJ9.8XiC8b6kNT1g2GSSU5P0Sg';
+mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.0/mapbox-gl-rtl-text.js')
 const map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/light-v10',
-    center: [-103.59179687498357, 40.66995747013945],
-    zoom: 3
+    container: 'cluster-map',
+    style: 'mapbox://styles/mapbox/outdoors-v11',
+    center: [53.6880, 32.4279],
+    zoom: 4
 });
+
+map.addControl(new mapboxgl.NavigationControl())
 
 map.on('load', function () {
     // Add a new source from our GeoJSON data and

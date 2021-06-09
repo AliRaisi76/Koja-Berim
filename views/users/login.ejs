@@ -1,21 +1,33 @@
 <% layout('layouts/boilerplate') %> 
 
-<h1>ورود به کجا بریم!؟</h1>
 
-<form action="/login" class="validated-form" novalidate method="POST">
-    <div class="mb-3">
-        <label class="form-label" for="username">نام کاربری</label>
-        <input class="form-control" type="text" name="username" id="username" required>
-        <div class="valid-feedback">
-            بنظر خوب میاد!
+<div class="container d-flex justify-content-center align-items-center mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">ورود به کجابریم</h5>
+                    <form action="/login" class="validated-form" novalidate method="POST">
+                        <div class="mb-3">
+                            <label class="form-label" for="username">نام کاربری</label>
+                            <input class="form-control" type="text" name="username" id="username" required autofocus>
+                            <div class="valid-feedback">
+                                بنظر خوب میاد!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="password">رمز عبور</label>
+                            <input class="form-control" type="password" name="password" id="password" required>
+                            <div class="valid-feedback">
+                                بنظر خوب میاد!
+                            </div>
+                        </div>
+                        <button class="btn btn-success btn-block">ورود</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="mb-3">
-        <label class="form-label" for="password">رمز عبور</label>
-        <input class="form-control" type="password" name="password" id="password" required>
-        <div class="valid-feedback">
-            بنظر خوب میاد!
-        </div>
-    </div>
-    <button class="btn btn-success">ورود</button>
-</form>
+</div>
+
+
