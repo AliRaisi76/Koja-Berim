@@ -1,3 +1,4 @@
+const { findById } = require('../models/user')
 const User = require('../models/user')
 
 
@@ -30,6 +31,12 @@ module.exports.login = async (req, res) => {
     const redirectUrl = req.session.returnTo || '/campgrounds'
     delete req.session.returnTo
     res.redirect(redirectUrl)
+}
+
+module.exports.renderUser = async (req, res) => {
+    const {id } = req.params
+    const user = await User.findById(id)
+    res.render('users/show', { user })
 }
 
 module.exports.logout = (req, res) => {

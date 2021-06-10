@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const Campgrounds = require('./campground')
 const passportLocalMongoose = require('passport-local-mongoose')
 
 const UserSchema = new Schema({
@@ -7,6 +8,10 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         unique: true
+    },
+    campgrounds: {
+        type: Schema.Types.ObjectId,
+        ref: 'Campgrounds'
     }
 })
 

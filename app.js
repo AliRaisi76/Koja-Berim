@@ -91,38 +91,35 @@ const scriptSrcUrls = [
     "https://kit.fontawesome.com/",
     "https://cdnjs.cloudflare.com/",
     "https://cdn.jsdelivr.net",
-    "https://cdn.jsdelivr.net/",
-    "https://maxcdn.bootstrapcdn.com",
-    "https://maxcdn.bootstrapcdn.com/font-awesome/"
+    "http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+    
 ];
 const styleSrcUrls = [
-    "https://maxcdn.bootstrapcdn.com",
     "https://kit-free.fontawesome.com/",
     "https://stackpath.bootstrapcdn.com/",
     "https://api.mapbox.com/",
     "https://api.tiles.mapbox.com/",
     "https://fonts.googleapis.com/",
     "https://use.fontawesome.com/",
-    "https://cdn.jsdelivr.net/",
-    "https://maxcdn.bootstrapcdn.com",
-    "https://maxcdn.bootstrapcdn.com/font-awesome/",
+    "https://maxcdn.bootstrapcdn.com/",
+    "https://cdnjs.cloudflare.com/",
+    "https://cdn.jsdelivr.net",
 ];
 const connectSrcUrls = [
     "https://api.mapbox.com/",
     "https://a.tiles.mapbox.com/",
     "https://b.tiles.mapbox.com/",
     "https://events.mapbox.com/",
+
 ];
-
-const fontSrcUrls = ["https://maxcdn.bootstrapcdn.com", "https://maxcdn.bootstrapcdn.com/font-awesome/"];
-
+const fontSrcUrls = ["https://maxcdn.bootstrapcdn.com/font-awesome/"];
 app.use(
     helmet.contentSecurityPolicy({
         directives: {
             defaultSrc: [],
             connectSrc: ["'self'", ...connectSrcUrls],
             scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
-            styleSrc: ["'unsafe-inline'", "'self'", ...styleSrcUrls],
+            styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
             workerSrc: ["'self'", "blob:"],
             objectSrc: [],
             imgSrc: [
@@ -131,6 +128,7 @@ app.use(
                 "data:",
                 "https://res.cloudinary.com/dsocdtkbf/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
                 "https://images.unsplash.com/",
+                "https://www.irangazette.com/"
             ],
             fontSrc: ["'self'", ...fontSrcUrls],
         },
@@ -145,7 +143,6 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
 app.use((req, res, next) => {
-    console.log(req.query)
     res.locals.currentUser = req.user
     res.locals.success = req.flash('success')
     res.locals.error = req.flash('error')
@@ -159,6 +156,8 @@ app.use('/campgrounds', campgroundRoutes)
 app.use('/campgrounds/:id/reviews', reviewRoutes)
 //
 app.use('/', userRoutes)
+//
+
 
 
 
@@ -191,6 +190,6 @@ app.use((err, req, res, next) => {
 
 
 // Rah andazi server 
-app.listen(3000, () => {
+app.listen(3000, () => { 
     console.log('Serving on port 3000')
 })

@@ -21,7 +21,6 @@ module.exports.createCampground = async (req, res, next) => {
     //     query: req.body.campground.location,
     //     limit: 1
     // }).send()
-    console.log(req.body)
     const campground = new Campground(req.body.campground)
     // error handling baraye peida nashodane makan
     // if(!geoData.body.features[0]){
@@ -34,7 +33,6 @@ module.exports.createCampground = async (req, res, next) => {
     campground.images = req.files.map(f => ({ url: f.path, filename: f.filename }))
     campground.author = req.user._id
     await campground.save()
-    console.log(campground)
     req.flash('success', 'با موفقیت یک کمپ جدید ایجاد شد ! ')
     res.redirect(`/campgrounds/${campground._id}`)
 }
@@ -46,7 +44,6 @@ module.exports.showCampground = async (req, res) => {
             path: 'author'
         }
     }).populate('author')
-    console.log(campground.images)
     if (!campground) {
         req.flash('error', 'Cannot find that campground')
         return res.redirect('/campgrounds')
@@ -87,7 +84,6 @@ module.exports.updateCampground = async (req, res) => {
             await cloudinary.uploader.destroy(filename)
         }
         await campground.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } })
-        console.log(campground)
     }
     req.flash('success', 'کمپ با موفقیت ویرایش شد !')
     res.redirect(`/campgrounds/${campground._id}`)
