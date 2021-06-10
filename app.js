@@ -1,8 +1,7 @@
-if(process.env.NODE_ENV !== 'production'){
+if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
 }
 
-console.log(process.env.SECRET)
 
 const express = require('express')
 const path = require('path')
@@ -12,10 +11,13 @@ const app = express()
 const methodOverride = require('method-override')
 const ExpressError = require('./utils/ExpressError')
 const session = require('express-session')
-const flash = require('connect-flash') 
+const flash = require('connect-flash')
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const User = require('./models/user')
+const helmet = require('helmet')
+
+const mongoSanitize = require('express-mongo-sanitize')
 
 
 
@@ -23,6 +25,7 @@ const userRoutes = require('./routes/users')
 const campgroundRoutes = require('./routes/campgrounds')
 const reviewRoutes = require('./routes/reviews')
 const { serializeUser } = require('passport')
+const { contentSecurityPolicy } = require('helmet')
 
 
 // connecting the database to the uri or url of our app 
@@ -57,12 +60,20 @@ app.engine('ejs', ejsMate)
 //
 app.use(express.static(path.join(__dirname, 'public')))
 
+app.use(
+    mongoSanitize({
+        replaceWith: '_',
+    }),
+)
+
 const sessionCofig = {
+    name: 'session',
     secret: 'thisshouldbeabettersecret!',
     resave: false,
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
+        // secure: true,
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
@@ -71,7 +82,60 @@ const sessionCofig = {
 
 app.use(session(sessionCofig))
 app.use(flash())
+app.use(helmet())
 
+const scriptSrcUrls = [
+    "https://stackpath.bootstrapcdn.com/",
+    "https://api.tiles.mapbox.com/",
+    "https://api.mapbox.com/",
+    "https://kit.fontawesome.com/",
+    "https://cdnjs.cloudflare.com/",
+    "https://cdn.jsdelivr.net",
+    "https://cdn.jsdelivr.net/",
+    "https://maxcdn.bootstrapcdn.com",
+    "https://maxcdn.bootstrapcdn.com/font-awesome/"
+];
+const styleSrcUrls = [
+    "https://maxcdn.bootstrapcdn.com",
+    "https://kit-free.fontawesome.com/",
+    "https://stackpath.bootstrapcdn.com/",
+    "https://api.mapbox.com/",
+    "https://api.tiles.mapbox.com/",
+    "https://fonts.googleapis.com/",
+    "https://use.fontawesome.com/",
+    "https://cdn.jsdelivr.net/",
+    "https://maxcdn.bootstrapcdn.com",
+    "https://maxcdn.bootstrapcdn.com/font-awesome/",
+];
+const connectSrcUrls = [
+    "https://api.mapbox.com/",
+    "https://a.tiles.mapbox.com/",
+    "https://b.tiles.mapbox.com/",
+    "https://events.mapbox.com/",
+];
+
+const fontSrcUrls = ["https://maxcdn.bootstrapcdn.com", "https://maxcdn.bootstrapcdn.com/font-awesome/"];
+
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            defaultSrc: [],
+            connectSrc: ["'self'", ...connectSrcUrls],
+            scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+            styleSrc: ["'unsafe-inline'", "'self'", ...styleSrcUrls],
+            workerSrc: ["'self'", "blob:"],
+            objectSrc: [],
+            imgSrc: [
+                "'self'",
+                "blob:",
+                "data:",
+                "https://res.cloudinary.com/dsocdtkbf/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
+                "https://images.unsplash.com/",
+            ],
+            fontSrc: ["'self'", ...fontSrcUrls],
+        },
+    })
+);
 
 app.use(passport.initialize())
 app.use(passport.session())
@@ -81,7 +145,7 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
 app.use((req, res, next) => {
-    // console.log(req.session)
+    console.log(req.query)
     res.locals.currentUser = req.user
     res.locals.success = req.flash('success')
     res.locals.error = req.flash('error')

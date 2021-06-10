@@ -17,17 +17,20 @@ module.exports.renderNewForm = (req, res) => {
 }
 
 module.exports.createCampground = async (req, res, next) => {
-    const geoData = await geocoder.forwardGeocode({
-        query: req.body.campground.location,
-        limit: 1
-    }).send()
+    // const geoData = await geocoder.reverseGeocode({
+    //     query: req.body.campground.location,
+    //     limit: 1
+    // }).send()
+    console.log(req.body)
     const campground = new Campground(req.body.campground)
     // error handling baraye peida nashodane makan
-    if(!geoData.body.features[0]){
-        req.flash('error', 'مکان مورد نظر پیدا نشد!')
-        return res.redirect('/campgrounds/new')
-    }
-    campground.geometry = geoData.body.features[0].geometry
+    // if(!geoData.body.features[0]){
+    //     req.flash('error', 'مکان مورد نظر پیدا نشد!')
+    //     return res.redirect('/campgrounds/new')
+    // }
+    // campground.geometry = geoData.body.features[0].geometry
+    campground.geometry.coordinates.push(req.body.campground.locationLng)
+    campground.geometry.coordinates.push(req.body.campground.locationLat)
     campground.images = req.files.map(f => ({ url: f.path, filename: f.filename }))
     campground.author = req.user._id
     await campground.save()

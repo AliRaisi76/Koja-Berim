@@ -15,7 +15,7 @@ module.exports.isLoggedIn = (req, res, next) => {
 
 
 
-// middleware to validate the campground information passed thriugh the request body
+// middleware to validate the campground information passed through the request body
 module.exports.validateCampground = (req, res, next) => {
     const { error } = campgroundSchema.validate(req.body)
     if (error) {

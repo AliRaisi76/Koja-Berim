@@ -1,4 +1,4 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoiYWxpcmFpc2kiLCJhIjoiY2tuano4ZmY1MDY2bjJvcG1tMGdyZDFpMSJ9.8XiC8b6kNT1g2GSSU5P0Sg';
+mapboxgl.accessToken = mapToken
 mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.0/mapbox-gl-rtl-text.js')
 const map = new mapboxgl.Map({
     container: 'cluster-map',
