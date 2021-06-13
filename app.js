@@ -15,6 +15,8 @@ const flash = require('connect-flash')
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const User = require('./models/user')
+const Campground = require('./models/campground')
+const Landlord = require('./models/landlord')
 const helmet = require('helmet')
 
 const mongoSanitize = require('express-mongo-sanitize')
@@ -23,6 +25,7 @@ const mongoSanitize = require('express-mongo-sanitize')
 
 const userRoutes = require('./routes/users')
 const campgroundRoutes = require('./routes/campgrounds')
+const landlordRoutes = require('./routes/landlords')
 const reviewRoutes = require('./routes/reviews')
 const { serializeUser } = require('passport')
 const { contentSecurityPolicy } = require('helmet')
@@ -91,8 +94,7 @@ const scriptSrcUrls = [
     "https://kit.fontawesome.com/",
     "https://cdnjs.cloudflare.com/",
     "https://cdn.jsdelivr.net",
-    "http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
-    
+    "https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
 ];
 const styleSrcUrls = [
     "https://kit-free.fontawesome.com/",
@@ -138,9 +140,15 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 passport.use(new LocalStrategy(User.authenticate()))
+// passport.use(new LocalStrategy(Landlord.authenticate()))
 
 passport.serializeUser(User.serializeUser())
+// passport.serializeUser(Landlord.serializeUser())
+
 passport.deserializeUser(User.deserializeUser())
+// passport.deserializeUser(Landlord.deserializeUser())
+
+
 
 app.use((req, res, next) => {
     res.locals.currentUser = req.user
@@ -155,8 +163,9 @@ app.use('/campgrounds', campgroundRoutes)
 //
 app.use('/campgrounds/:id/reviews', reviewRoutes)
 //
-app.use('/', userRoutes)
+app.use('/users', userRoutes)
 //
+app.use('/landlords', landlordRoutes)
 
 
 
@@ -190,6 +199,6 @@ app.use((err, req, res, next) => {
 
 
 // Rah andazi server 
-app.listen(3000, () => { 
+app.listen(3000, () => {
     console.log('Serving on port 3000')
 })

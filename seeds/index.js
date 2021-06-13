@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Campground = require('../models/campground')
+const User = require('../models/user')
 const cities = require('./cities')
 const { places, descriptors } = require('./seedhelpers')
 // connecting the database to the uri or url of our app 
@@ -20,11 +21,11 @@ const sample = array => array[Math.floor(Math.random() * array.length)]
 
 const seedDB = async () => {
   await Campground.deleteMany({})
-  for (let i = 0; i < 400; i++) {
+  for (let i = 0; i < 50; i++) {
     const random1000 = Math.floor(Math.random() * 1000)
     const price = Math.floor(Math.random() * 20) + 10
     const camp = new Campground({
-      author: '60b9e5f81e2c2c2b04d9aa5e',
+      author: '60c63eca5d9fee245cf36b9f',
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
       title: `${sample(descriptors)}, ${sample(places)}  `,
       description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam sunt ullam vero officia corrupti recusandae dolor maiores. Animi, sequi, repudiandae commodi corrupti aspernatur in aliquid, iusto et nulla blanditiis ab.',
@@ -51,7 +52,12 @@ const seedDB = async () => {
         }
       ]
     })
+    const user = await User.findById('60c63eca5d9fee245cf36b9f')
+    user.campgrounds.push(camp._id)
+    
+
     await camp.save()
+    await user.save()
   }
 }
 

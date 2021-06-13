@@ -3,6 +3,7 @@ const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding')
 const mapBoxToken = process.env.MAPBOX_TOKEN
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken })
 const { cloudinary } = require('../cloudinary')
+const User = require('../models/user')
 
 
 
@@ -32,7 +33,16 @@ module.exports.createCampground = async (req, res, next) => {
     campground.geometry.coordinates.push(req.body.campground.locationLat)
     campground.images = req.files.map(f => ({ url: f.path, filename: f.filename }))
     campground.author = req.user._id
+
+    // ezafe kardane id camp be modele user
+    const user = await User.findById(req.user._id)
+    user.campgrounds.push(campground._id)
+
     await campground.save()
+
+    await user.save()
+
+
     req.flash('success', 'با موفقیت یک کمپ جدید ایجاد شد ! ')
     res.redirect(`/campgrounds/${campground._id}`)
 }

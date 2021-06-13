@@ -4,8 +4,23 @@
     <%= user.username %> 
 </h1>
 
-<div class="card-body">
-    <h5 style="direction: rtl;" class="card-title">
-        <%= user.username  %>
-    </h5>
-</div>
+<% for (let campground of user.campgrounds) { %>
+    <div style="direction: rtl;" class="card mb-3">
+        <div style="direction: rtl;" class="row">
+            <div style="direction: rtl;" class="col-md-4">
+                <img src="<%= campground.images[0].url %> " class="img-fluid" alt="">
+            </div>
+            <div style="direction: rtl;" class="col-md-8">
+                <div style="direction: rtl;" class="card-body">
+                    <h5 style="direction: rtl;"><%= campground.title %> </h5>
+                    <p style="direction: rtl;" class="card-text"><%= campground.description %> </p>
+                    <p style="direction: rtl;" class="card-text">
+                        <small id="location" style="direction: rtl;" class="text-muted fa fa-map-marker"> <%= campground.location %> </small>
+                    </p>
+                    <a style="direction: rtl;" href="/campgrounds/<%= campground._id%>" class="btn btn-primary">نشان دادن  <%= campground.title %> </a>
+
+                </div>
+            </div> 
+        </div>
+    </div>
+<% } %>

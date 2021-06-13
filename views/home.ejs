@@ -22,10 +22,10 @@
                     <a class="nav-link active" aria-current="page" href="#">خانه</a>
                     <a class="nav-link" href="/campgrounds">کمپ‌ها</a>
                     <% if(!currentUser) { %>
-                        <a class="nav-link" href="/login">ورود به سایت</a>
-                        <a class="nav-link" href="/register">ثبت نام</a>
+                        <a class="nav-link" href="/users/login">ورود به سایت</a>
+                        <a class="nav-link" href="/users/register">ثبت نام</a>
                         <% }else {%>
-                        <a class="nav-link" href="/logout">خروج</a>
+                        <a class="nav-link" href="/users/logout">خروج</a>
                     <% } %>
                 </nav>
             </div>

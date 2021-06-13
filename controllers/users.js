@@ -1,5 +1,7 @@
 const { findById } = require('../models/user')
 const User = require('../models/user')
+const Campground = require('../models/campground')
+
 
 
 module.exports.renderRegister = (req, res) => {
@@ -18,7 +20,7 @@ module.exports.register = async (req, res, next) => {
         })
     } catch (e) {
         req.flash('error', e.message)
-        res.redirect('/register')
+        res.redirect('/users/register')
     }
 }
 
@@ -26,7 +28,7 @@ module.exports.renderLogin = (req, res) => {
     res.render('users/login')
 }
 
-module.exports.login = async (req, res) => {
+module.exports.login = (req, res) => {
     req.flash('success', 'خوش برگشتین!')
     const redirectUrl = req.session.returnTo || '/campgrounds'
     delete req.session.returnTo
@@ -34,13 +36,13 @@ module.exports.login = async (req, res) => {
 }
 
 module.exports.renderUser = async (req, res) => {
-    const {id } = req.params
-    const user = await User.findById(id)
+    const id = req.params.id
+    const user = await User.findById(id).populate('campgrounds')
     res.render('users/show', { user })
 }
 
 module.exports.logout = (req, res) => {
     req.logOut()
     req.flash('success', 'خدانگهدار!')
-    res.redirect('/campgrounds')
+    res.redirect('/users/login')
 }
