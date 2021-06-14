@@ -41,6 +41,24 @@ module.exports.renderUser = async (req, res) => {
     res.render('users/show', { user })
 }
 
+
+module.exports.renderEditUser = async (req, res) => {
+    const { id } = req.params
+    const user = await User.findById(id)
+    if (!user) {
+        req.flash('error', 'کاربر مورد نظر پیدا نشد !')
+        return res.redirect('/users/login')
+    }
+
+    res.render('users/edit', { user })
+}
+
+module.exports.updateUser = async( req,res) =>{
+    const id = req.params.id
+    const user = await User.findByIdAndUpdate(id, { ...req.body.user })
+}
+
+
 module.exports.logout = (req, res) => {
     req.logOut()
     req.flash('success', 'خدانگهدار!')

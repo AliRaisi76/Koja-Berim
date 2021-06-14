@@ -17,6 +17,9 @@ router.route('/login')
 
 router.get('/:id', users.renderUser)
 
+router.get('/:id/edit',users.renderEditUser)
+   
+
 
 router.get('/logout', users.logout)
 

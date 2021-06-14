@@ -1,8 +1,10 @@
 <% layout('layouts/boilerplate') %>
-
-<h1>
-    <%= user.username %> 
-</h1>
+<div class="mb-3">
+<h5>نام کاربری: <%= user.username %> </h5>
+</div>
+<div class="mb-3">
+<h5 class="mb-3">ایمیل: <%= user.email %> </h5>
+</div>
 
 <% for (let campground of user.campgrounds) { %>
     <div style="direction: rtl;" class="card mb-3">
@@ -21,6 +23,10 @@
 
                 </div>
             </div> 
+           
         </div>
     </div>
 <% } %>
+<form action="/users/<%= user._id %>/edit ">
+    <button class="btn btn-outline-warning mb-3">ویرایش کاربر</button>
+</form>
