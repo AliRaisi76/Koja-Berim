@@ -44,12 +44,11 @@ module.exports.renderUser = async (req, res) => {
 
 module.exports.renderEditUser = async (req, res) => {
     const { id } = req.params
-    const user = await User.findById(id)
+    const user = await User.findById(id).populate('campgrounds')
     if (!user) {
         req.flash('error', 'کاربر مورد نظر پیدا نشد !')
         return res.redirect('/users/login')
     }
-
     res.render('users/edit', { user })
 }
 

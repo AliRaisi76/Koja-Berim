@@ -36,11 +36,11 @@ module.exports.login = async (req, res) => {
     res.redirect(redirectUrl)
 }
 
-// module.exports.renderLandlord = async (req, res) => {
-//     const { id } = req.params
+//  module.exports.renderLandlord = async (req, res) => {
+//      const { id } = req.params
 //     const landlord = await User.findById(id)
 //     res.render('landlords/show', { landlord })
-// }
+//  }
 
 
 module.exports.logout = (req, res) => {

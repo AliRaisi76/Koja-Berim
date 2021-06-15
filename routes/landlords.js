@@ -14,7 +14,7 @@ router.route('/login')
     .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/landlords/login' }), landlords.login)
 
 
-// router.get('/:id', landlords.renderLandlord)
+//  router.get('/:id', landlords.renderLandlord)
 
 router.get('/logout', landlords.logout)
 
