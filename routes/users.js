@@ -15,6 +15,9 @@ router.route('/login')
     .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/users/login' }), users.login)
 
 
+router.get('/:id/edit',users.renderEditUser)
+   
+
 
 router.get('/logout', users.logout)
 
