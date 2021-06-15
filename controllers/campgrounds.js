@@ -11,6 +11,7 @@ const User = require('../models/user')
 module.exports.index = async (req, res) => {
     const campgrounds = await Campground.find({})
     res.render('campgrounds/index', { campgrounds })
+    console.log(req.user)
 }
 
 module.exports.renderNewForm = (req, res) => {

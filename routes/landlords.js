@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const catchAsync = require('../utils/catchAsync')
-const Landlord = require('../models/landlord')
 const passport = require('passport')
 const landlords = require('../controllers/landlords')
 
@@ -14,9 +13,17 @@ router.route('/login')
     .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/landlords/login' }), landlords.login)
 
 
-// router.get('/:id', landlords.renderLandlord)
 
 router.get('/logout', landlords.logout)
+
+router.get('/:id/edit', landlords.renderEditLandlord)
+
+
+router.get('/:id', landlords.renderLandlord)
+
+router.put('/:id', landlords.updateLandlord)
+
+
 
 
 
