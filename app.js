@@ -16,7 +16,6 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const User = require('./models/user')
 const Campground = require('./models/campground')
-const Landlord = require('./models/landlord')
 const helmet = require('helmet')
 
 const mongoSanitize = require('express-mongo-sanitize')
@@ -25,7 +24,6 @@ const mongoSanitize = require('express-mongo-sanitize')
 
 const userRoutes = require('./routes/users')
 const campgroundRoutes = require('./routes/campgrounds')
-const landlordRoutes = require('./routes/landlords')
 const reviewRoutes = require('./routes/reviews')
 const { serializeUser } = require('passport')
 const { contentSecurityPolicy } = require('helmet')
@@ -139,14 +137,23 @@ app.use(
 
 app.use(passport.initialize())
 app.use(passport.session())
+
+
 passport.use(new LocalStrategy(User.authenticate()))
-// passport.use(new LocalStrategy(Landlord.authenticate()))
+
 
 passport.serializeUser(User.serializeUser())
-// passport.serializeUser(Landlord.serializeUser())
 
 passport.deserializeUser(User.deserializeUser())
-// passport.deserializeUser(Landlord.deserializeUser())
+
+
+
+
+
+
+
+
+
 
 
 
@@ -164,8 +171,6 @@ app.use('/campgrounds', campgroundRoutes)
 app.use('/campgrounds/:id/reviews', reviewRoutes)
 //
 app.use('/users', userRoutes)
-//
-app.use('/landlords', landlordRoutes)
 
 
 
