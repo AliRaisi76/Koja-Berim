@@ -8,9 +8,11 @@
 <div class="mb-5">
 <h5 class="mb-5">ایمیل: <%= user.email %> <br> __________________________________________________ </h5>
 </div>
+<form action="/users/<%= user._id %>/edit ">
+    <button class="btn btn-outline-success mb-3">ویرایش کاربر</button>
+</form>
 
-
-<h4 class="mb-3">پست ها:</h4>
+<h4 class="mb-3">پست ها: <%= user.campgrounds.length %> پست </h4>
 <% for (let campground of user.campgrounds) { %>
     <div style="direction: rtl;" class="card mb-5">
         <div style="direction: rtl;" class="row">
@@ -32,6 +34,4 @@
         </div>
     </div>
 <% } %>
-<form action="/users/<%= user._id %>/edit ">
-    <button class="btn btn-outline-success mb-3">ویرایش کاربر</button>
-</form>
+

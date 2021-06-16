@@ -1,0 +1,22 @@
+<% layout('layouts/boilerplate') %>
+
+    <form class="validated-form" action="/users/<%= user._id %>?_method=PUT " method="POST" novalidate>
+        <div style="direction: rtl;" class="mb-3">
+            <label style="direction: rtl;" class="form-label" for="username">نام کاربری</label>
+            <input class="form-control" type="text" name="username" id="username"
+                value="<%= user.username %>" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div style="direction: rtl;" class="mb-3">
+            <label style="direction: rtl;" class="form-label" for="password">نام کاربری</label>
+            <input class="form-control" type="text" name="password" id="password" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <button>submit</button>
+
+
+    </form>
