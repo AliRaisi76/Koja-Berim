@@ -1,7 +1,8 @@
-const { campgroundSchema, reviewSchema } = require('./schemas')
+const { campgroundSchema, reviewSchema, residenceSchema } = require('./schemas')
 const ExpressError = require('./utils/ExpressError')
 const Campground = require('./models/campground')
 const Review = require('./models/review')
+const Residence  = require('./models/residence')
 
 
 module.exports.isLoggedIn = (req, res, next) => {
@@ -59,3 +60,13 @@ module.exports.validateReview = (req, res, next) => {
     }
 }
 
+
+module.exports.validateResidence = (req,res,next) => {
+    const { error } = residenceSchema.validate(req.body)
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg,400)
+    } else {
+        next()
+    }
+}

@@ -17,7 +17,7 @@ module.exports.renderNewForm = (req, res) => {
 }
 
 
-module.exports.createCampground = async (req, res, next) => {
+module.exports.createResidence = async (req, res, next) => {
     // const geoData = await geocoder.reverseGeocode({
     //     query: req.body.campground.location,
     //     limit: 1
