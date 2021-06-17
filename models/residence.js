@@ -26,6 +26,7 @@ const residenceSchema = new Schema({
     images: [ImageSchema],
     price: Number,
     description: String,
+    phoneNumber:Number,
     location: String,
     author: {
         type: Schema.Types.ObjectId,

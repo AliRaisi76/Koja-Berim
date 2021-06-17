@@ -17,7 +17,7 @@ const UserSchema = new Schema({
     ],
     assets: {
         type :Schema.Types.ObjectId,
-        ref: ''
+        ref: 'Residence'
     }
 })
 

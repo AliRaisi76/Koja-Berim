@@ -42,3 +42,16 @@ module.exports.reviewSchema = Joi.object({
         rating: Joi.number().required().min(1).max(5)
     }).required()
 })
+
+module.exports.residenceSchema = Joi.object({
+    residence:Joi.object({
+        title:Joi.string().required().escapeHTML(),
+        price: Joi.number().required().min(0),
+        locationLng: Joi.string().required().escapeHTML(),
+        locationLat: Joi.string().required().escapeHTML(),
+        description: Joi.string().required().escapeHTML()
+    }).required(),
+    deleteImages: Joi.array()
+        
+
+    })
