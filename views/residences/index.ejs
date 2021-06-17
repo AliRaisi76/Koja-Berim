@@ -1,0 +1,33 @@
+<% layout('layouts/boilerplate') %> 
+<div dir="ltr" id="cluster-map" ></div>
+<h1 class="mb-3" style="direction: rtl;">تمام ملک ها</h1>
+<div style="direction: rtl;">
+    <a style="direction: rtl;" href="/residences/new"> اضافه کردن ملک </a>
+</div>
+<% for (let residence of residences) { %>
+    <div style="direction: rtl;" class="card mb-3">
+        <div style="direction: rtl;" class="row">
+            <div style="direction: rtl;" class="col-md-4">
+                <img src="<%= residence.images[0].url %> " class="img-fluid" alt="">
+            </div>
+            <div style="direction: rtl;" class="col-md-8">
+                <div style="direction: rtl;" class="card-body">
+                    <h5 style="direction: rtl;"><%= residence.title %> </h5>
+                    <p style="direction: rtl;" class="card-text"><%= residence.description %></p>
+                    <p style="direction: rtl;" class="card-text">
+                        <small id="location" style="direction: rtl;" class="text-muted fa fa-map-marker"> <%= residence.location %> </small>
+                    </p>
+                    <a style="direction: rtl;" href="/residences/<%= residence._id%>" class="btn btn-primary">نشان دادن  <%= campground.title %> </a>
+
+                </div>
+            </div> 
+        </div>
+    </div>
+<% } %>
+
+
+<script>
+    const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+    const residences = {features: <%-JSON.stringify(residences)%>}
+</script>
+<script src="/javascripts/clusterMap.js"></script>

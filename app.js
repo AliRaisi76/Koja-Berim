@@ -23,6 +23,7 @@ const mongoSanitize = require('express-mongo-sanitize')
 
 
 const userRoutes = require('./routes/users')
+const residenceRoutes = require('./routes/residence')
 const campgroundRoutes = require('./routes/campgrounds')
 const reviewRoutes = require('./routes/reviews')
 const { serializeUser } = require('passport')
@@ -171,6 +172,7 @@ app.use('/campgrounds', campgroundRoutes)
 app.use('/campgrounds/:id/reviews', reviewRoutes)
 //
 app.use('/users', userRoutes)
+app.use('/residences' ,residenceRoutes)
 
 
 

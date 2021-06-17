@@ -8,20 +8,22 @@ const multer = require('multer')
 const { storage } = require('../cloudinary')
 const upload = multer({ storage })
 
-router.get('/residences' ,catchAsync(residences.index))
 
-router.post('/residences',isLoggedIn,upload.array('image'),validateResidence,catchAsync(residences.createResidence))
+router.route('/')
+.get(catchAsync(residences.index))
+.post(isLoggedIn,upload.array('image'),validateResidence,catchAsync(residences.createResidence))
  
 
-router.get('/residences/new',isLoggedIn,residences.renderNewForm)
+router.get('/new',isLoggedIn,residences.renderNewForm)
 
-router.get('/residences/:id', catchAsync(residences.showResidence))
 
-router.put('/residences/:id',isLoggedIn,isAuthor,upload.array('image'), validateResidence, catchAsync(residences.updateResidences))
+router.route('/:id')
+.get( catchAsync(residences.showResidence))
+.put(isLoggedIn,isAuthor,upload.array('image'), validateResidence, catchAsync(residences.updateResidences))
+.delete(isLoggedIn,isAuthor,catchAsync(residences.deleteResidences))
 
-router.delete('/residences/:id',isLoggedIn,isAuthor,catchAsync(residences.deleteResidences))
 
-router.get('/residences/:id/edit',isLoggedIn,isAuthor,catchAsync(residences.renderEditForm))
+router.get('/:id/edit',isLoggedIn,isAuthor,catchAsync(residences.renderEditForm))
 
 
 module.exports = router
