@@ -20,12 +20,12 @@ db.once('open', function () {
 const sample = array => array[Math.floor(Math.random() * array.length)]
 
 const seedDB = async () => {
-  await Campground.deleteMany({})
-  for (let i = 0; i < 50; i++) {
+  // await Campground.deleteMany({})
+  for (let i = 0; i < 20; i++) {
     const random1000 = Math.floor(Math.random() * 1000)
     const price = Math.floor(Math.random() * 20) + 10
     const camp = new Campground({
-      author: '60c222295d06dc217c50391a',
+      author: '60c91e58a8a149090ce208e1',
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
       title: `${sample(descriptors)}, ${sample(places)}  `,
       description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam sunt ullam vero officia corrupti recusandae dolor maiores. Animi, sequi, repudiandae commodi corrupti aspernatur in aliquid, iusto et nulla blanditiis ab.',
@@ -52,7 +52,7 @@ const seedDB = async () => {
         }
       ]
     })
-    const user = await User.findById('60c222295d06dc217c50391a')
+    const user = await User.findById('60c91e58a8a149090ce208e1')
     user.campgrounds.push(camp._id)
     
 

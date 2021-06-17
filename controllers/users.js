@@ -10,7 +10,7 @@ module.exports.renderRegister = (req, res) => {
 
 module.exports.register = async (req, res, next) => {
     try {
-        const { email, username, password, isLandlord } = req.body
+        const { email, username, password } = req.body
         const user = new User({ email, username })
         const registeredUser = await User.register(user, password)
         req.login(registeredUser, err => {
@@ -52,11 +52,25 @@ module.exports.renderEditUser = async (req, res) => {
     res.render('users/edit', { user })
 }
 
-module.exports.updateUser = async( req,res) =>{
+module.exports.updateUser = async (req, res) => {
     const id = req.params.id
-    const user = await User.findByIdAndUpdate(id, { ...req.body.user })
+    const { username, email, password } = req.body
+    const user = await User.findByIdAndUpdate(id, { username, email })
+    // if (!user) {
+    //     req.flash('error', 'کاربر مورد نظر پیدا نشد!')
+    //     return res.redirect(`/users/${id}/edit`)
+    // }
+    const sanitizedUser = await User.findByUsername(username);
+    try {
+        await sanitizedUser.setPassword(password);
+        await sanitizedUser.save();
+    } catch (err) {
+        res.status(422).send(err);
+    }
+    user.save()
+    req.flash('success', 'پروفایل با موفقیت ویرایش شد !')
+    res.redirect('/users/login')
 }
-
 
 module.exports.logout = (req, res) => {
     req.logOut()
