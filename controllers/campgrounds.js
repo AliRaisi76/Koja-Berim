@@ -83,11 +83,13 @@ module.exports.updateCampground = async (req, res) => {
     //     limit: 1
     // }).send()
     // error handling baraye peida nashodane makan
-    if(!geoData.body.features[0]){
-        req.flash('error', 'مکان مورد نظر پیدا نشد!')
-        return res.redirect('/campgrounds/new')
-    }
-    campground.geometry = geoData.body.features[0].geometry
+    // if(!geoData.body.features[0]){
+    //     req.flash('error', 'مکان مورد نظر پیدا نشد!')
+    //     return res.redirect('/campgrounds/new')
+    // }
+    campground.geometry.coordinates.push(req.body.campground.locationLng)
+    campground.geometry.coordinates.push(req.body.campground.locationLat)
+    // campground.geometry = geoData.body.features[0].geometry
     campground.save()
     if (req.body.deleteImages) {
         for (let filename of req.body.deleteImages) {

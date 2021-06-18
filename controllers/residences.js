@@ -43,7 +43,7 @@ module.exports.createResidence = async (req, res, next) => {
     await user.save()
 
 
-    req.flash('success', 'با موفقیت یک کمپ جدید ایجاد شد ! ')
+    req.flash('success', 'با موفقیت یک  ملک جدید ایجاد شد ! ')
     res.redirect(`/residences/${residence._id}`)
 }
 
@@ -81,11 +81,13 @@ module.exports.updateResidences = async (req, res) => {
     //     limit: 1
     // }).send()
     // error handling baraye peida nashodane makan
-    if(!geoData.body.features[0]){
-        req.flash('error', 'مکان مورد نظر پیدا نشد!')
-        return res.redirect('/residences/new')
-    }
-    residence.geometry = geoData.body.features[0].geometry
+    // if(!geoData.body.features[0]){
+    //     req.flash('error', 'مکان مورد نظر پیدا نشد!')
+    //     return res.redirect('/residences/new')
+    // }
+    // residence.geometry = geoData.body.features[0].geometry
+    residence.geometry.coordinates.push(req.body.residence.locationLng)
+    residence.geometry.coordinates.push(req.body.residence.locationLat)
     residence.save()
     if (req.body.deleteImages) {
         for (let filename of req.body.deleteImages) {
@@ -93,7 +95,7 @@ module.exports.updateResidences = async (req, res) => {
         }
         await residence.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } })
     }
-    req.flash('success', 'کمپ با موفقیت ویرایش شد !')
+    req.flash('success', 'ملک با موفقیت ویرایش شد !')
     res.redirect(`/residences/${residence._id}`)
 }
 

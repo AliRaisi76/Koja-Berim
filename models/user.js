@@ -16,10 +16,10 @@ const UserSchema = new Schema({
             ref: Campground
         }
     ],
-    assets: {
+    assets:[ {
         type :Schema.Types.ObjectId,
         ref: 'Residence'
-    }
+    }]
 })
 
 UserSchema.plugin(passportLocalMongoose)
