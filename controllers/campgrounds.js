@@ -9,6 +9,7 @@ const User = require('../models/user')
 
 
 module.exports.index = async (req, res) => {
+    console.log(req)
     const campgrounds = await Campground.find({})
     res.render('campgrounds/index', { campgrounds })
 }
@@ -78,10 +79,7 @@ module.exports.updateCampground = async (req, res) => {
     const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground })
     const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }))
     campground.images.push(...imgs)
-    const geoData = await geocoder.forwardGeocode({
-        query: req.body.campground.location,
-        limit: 1
-    }).send()
+    
     // error handling baraye peida nashodane makan
     if(!geoData.body.features[0]){
         req.flash('error', 'مکان مورد نظر پیدا نشد!')

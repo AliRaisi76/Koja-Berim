@@ -1,6 +1,9 @@
 const { findById } = require('../models/user')
 const User = require('../models/user')
 const Campground = require('../models/campground')
+const session = require('express-session')
+const express = require('express')
+const app = express()
 
 
 
@@ -70,6 +73,31 @@ module.exports.updateUser = async (req, res) => {
     user.save()
     req.flash('success', 'پروفایل با موفقیت ویرایش شد !')
     res.redirect('/users/login')
+}
+
+
+module.exports.renderPremium = (req, res) => {
+    res.render('users/premium')
+}
+
+module.exports.premium = async (req, res) => {
+    const premiumSession = {
+        user: 'premiumUser',
+        name: 'prm',
+        secret: 'thiscanbeapremium!',
+        resave: false,
+        saveUninitialized: true,
+        cookie: {
+            httpOnly: true,
+            // secure: true,
+            expires: Date.now() + 1000 * 60 * 60 * 24 * 30,
+            maxAge: 1000 * 60 * 60 * 24 * 30
+        }
+    }
+    app.use(session(premiumSession))
+    req.session.prm = premiumSession.user
+    console.log(req.session)
+    res.redirect('/')
 }
 
 module.exports.logout = (req, res) => {

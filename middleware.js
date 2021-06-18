@@ -59,3 +59,10 @@ module.exports.validateReview = (req, res, next) => {
     }
 }
 
+module.exports.isPremium = (req, res, next) => {
+    if (!req.session.prm) {
+        req.session.returnTo = req.originalUrl
+        req.flash('error', 'ابتدا باید  حساب  پرمیوم بخرید!')
+        return res.redirect('/users/premium')
+    }
+}

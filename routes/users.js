@@ -17,13 +17,21 @@ router.route('/login')
     .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/users/login' }), users.login)
 
 
+router.route('/premium')
+    .get(isLoggedIn, users.renderPremium)
+    .post(isLoggedIn, users.premium)
+
+
 router.get('/:id/edit', isLoggedIn, users.renderEditUser)
-router.put('/:id', users.updateUser)
 
 
 router.get('/logout', users.logout)
 
-router.get('/:id', users.renderUser)
+
+router.route('/:id')
+    .put(isLoggedIn, users.updateUser)
+    .get(isLoggedIn, users.renderUser)
+
 
 
 module.exports = router
