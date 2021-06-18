@@ -1,0 +1,65 @@
+<% layout('layouts/boilerplate') %>
+
+
+
+    <div style="direction: rtl;" class="row">
+        <h1 style="direction: rtl;" class="text-center">ویرایش ملک</h1>
+        <div style="direction: rtl;" class="col-6 offset-3">
+            <form class="validated-form" action="/residences/<%= residence._id %>?_method=PUT " method="POST"
+                novalidate enctype="multipart/form-data">
+                <div style="direction: rtl;" class="mb-3">
+                    <label style="direction: rtl;" class="form-label" for="title">عنوان</label>
+                    <input class="form-control" type="text" name="residence[title]" id="title"
+                        value="<%=residence.title %>" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div style="direction: rtl;" class="mb-3">
+                    <label style="direction: rtl;" class="form-label" for="location">مکان</label>
+                    <input class="form-control" type="text" name="residence[location]" id="location"
+                        value="<%= residence.location %>" required>
+                    <div style="direction: rtl;" class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div style="direction: rtl;" class="mb-3">
+                    <label style="direction:rtl;" class="form-label" for="price">قیمت ملک</label>
+                    <div class="input-group mb-3">
+                        <span style="direction: rtl;" class="input-group-text " id="Price-label">&#65020;</span>
+                        <input type="text" class="form-control" placeholder="0.00" aria-label="Price"
+                            aria-describedby="price-label" id="price" name="residence[price]"
+                            value="<%= residence.price %>" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                </div>
+                <div style="direction: rtl;" class="mb-3">
+                    <label style="direction: rtl;" class="form-label" for="description">توضیحات</label>
+                    <textarea class="form-control" type="text" name="residence[description]" id="description"
+                        required> <%= residence.description %> </textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">اضافه کردن عکس</label>
+                    <input class="form-control" name="image" type="file" id="image" multiple>
+                </div>
+                <div class="mb-3">
+                    <% residence.images.forEach(function(img, i){ %>
+                        <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="">
+                        <div class="form-check-inline">
+                            <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+                        </div>
+                        <label for="image-<%=i%>">حذف؟</label> 
+                    <% }) %>
+                </div>
+                <div style="direction: rtl;" class="mb-3">
+                    <button style="direction: rtl;" class="btn btn-info">ویرایش ملک</button>
+                </div>
+            </form>
+            <a class="mb-4" style="direction: rtl;" href="/residences/<%= residence._id %> ">بازگشت به کمپ</a>
+        </div>
+    </div>

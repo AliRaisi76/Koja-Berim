@@ -3,7 +3,7 @@ const router = express.Router()
 const catchAsync = require('../utils/catchAsync')
 const Residence = require('../models/residence')
 const residences = require('../controllers/residences')
-const { isLoggedIn, isAuthor, validateResidence } = require('../middleware')
+const { isLoggedIn, residenceIsAuthor, validateResidence } = require('../middleware')
 const multer = require('multer')
 const { storage } = require('../cloudinary')
 const upload = multer({ storage })
@@ -19,11 +19,11 @@ router.get('/new',isLoggedIn,residences.renderNewForm)
 
 router.route('/:id')
 .get( catchAsync(residences.showResidence))
-.put(isLoggedIn,isAuthor,upload.array('image'), validateResidence, catchAsync(residences.updateResidences))
-.delete(isLoggedIn,isAuthor,catchAsync(residences.deleteResidences))
+.put(isLoggedIn,residenceIsAuthor,upload.array('image'), validateResidence, catchAsync(residences.updateResidences))
+.delete(isLoggedIn,residenceIsAuthor,catchAsync(residences.deleteResidences))
 
 
-router.get('/:id/edit',isLoggedIn,isAuthor,catchAsync(residences.renderEditForm))
+router.get('/:id/edit',isLoggedIn,residenceIsAuthor,catchAsync(residences.renderEditForm))
 
 
 module.exports = router

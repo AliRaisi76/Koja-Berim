@@ -70,3 +70,14 @@ module.exports.validateResidence = (req,res,next) => {
         next()
     }
 }
+
+
+module.exports.residenceIsAuthor = async (req, res, next) => {
+    const { id } = req.params
+    const residence = await Residence.findById(id)
+    if (!residence.author.equals(req.user._id)) {
+        req.flash('error', 'شما اجازه انجام این کار را ندارید!')
+        return res.redirect(`/residences/${id}`)
+    }
+    next()
+}
