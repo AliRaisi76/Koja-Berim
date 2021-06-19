@@ -17,10 +17,6 @@ router.route('/login')
     .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/users/login' }), users.login)
 
 
-router.route('/premium')
-    .get(isLoggedIn, users.renderPremium)
-    .post(isLoggedIn, users.premium)
-
 
 router.get('/:id/edit', isLoggedIn, users.renderEditUser)
 
@@ -31,6 +27,7 @@ router.get('/logout', users.logout)
 router.route('/:id')
     .put(isLoggedIn, users.updateUser)
     .get(isLoggedIn, users.renderUser)
+    .delete(isLoggedIn, users.deleteUser)
 
 
 

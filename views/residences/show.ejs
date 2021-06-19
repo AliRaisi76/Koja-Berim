@@ -1,0 +1,77 @@
+<% layout('layouts/boilerplate') %>
+    
+    
+
+    <div class="row">
+        
+        <div class="col-6">
+            <div id="map"></div>
+            <pre id="coordinates" class="coordinates"></pre>
+            <div id="residenceCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <% residence.images.forEach((img, i)=> { %>
+                        <div class="carousel-item <%= i === 0 ? 'active' : '' %> ">
+                            <img src="<%= img.url %>" class="d-block w-100" alt="">
+                        </div>
+                    <% }) %>
+                </div>
+                <% if(residence.images.length> 1) { %>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#residenceCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#residenceCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                <% } %>
+            </div>
+            <div class="card mb-3">
+
+
+                <div class="card-body">
+                    <h5 style="direction: rtl;" class="card-title">
+                        <%= residence.title %>
+                    </h5>
+
+                    <p style="direction: rtl;" class="card-text">
+                        <%= residence.description %>
+                    </p>
+
+                </div>
+                <ul style="direction: rtl;" class="list-group list-group-flush">
+                    <li style="direction: rtl;" class="list-group-item text-muted fa fa-map-marker">
+                        <%= residence.location %>
+                    </li>
+                    <li style="direction: rtl;" class="list-group-item">
+                        ارسال شده توسط:<%= residence.author.username %>
+                    </li>
+                    <!-- yadet bashe 3 ta sefre jeloye Toman to bardari -->
+                    <li style="direction: rtl;" class="list-group-item "> هزینه ورود: <%=residence.price %>000
+                            تومان
+                    </li>
+                </ul>
+                <% if(currentUser && residence.author.equals(currentUser._id)) { %>
+                    <div style="direction: rtl;" class="card-body">
+                        <a style="direction: rtl;" class="card-link btn btn-info"
+                            href="/residences/<%= residence._id %>/edit">ویرایش</a>
+                        <form style="direction: rtl;" class="d-inline"
+                            action="/residences/<%=residence._id%>?_method=DELETE " method="POST">
+                            <button style="direction: rtl;" class="btn btn-danger">حذف</button>
+                        </form>
+                    </div>
+                    <% } %>
+                        <div class="card-footer text-muted">
+                            2 days ago
+                        </div>
+            </div>
+            <!-- &#65020; -->
+
+       
+    <script>
+        const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+        const residence = <%-JSON.stringify(residence)%>
+    </script>
+    <script src="/javascripts/showResidenceMap.js"></script>

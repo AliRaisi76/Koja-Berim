@@ -80,24 +80,13 @@ module.exports.renderPremium = (req, res) => {
     res.render('users/premium')
 }
 
-module.exports.premium = async (req, res) => {
-    const premiumSession = {
-        user: 'premiumUser',
-        name: 'prm',
-        secret: 'thiscanbeapremium!',
-        resave: false,
-        saveUninitialized: true,
-        cookie: {
-            httpOnly: true,
-            // secure: true,
-            expires: Date.now() + 1000 * 60 * 60 * 24 * 30,
-            maxAge: 1000 * 60 * 60 * 24 * 30
-        }
-    }
-    app.use(session(premiumSession))
-    req.session.prm = premiumSession.user
-    console.log(req.session)
-    res.redirect('/')
+
+module.exports.deleteUser = async (req, res) => {
+    const { id } = req.params
+    await User.findByIdAndDelete(id)
+    req.flash('success', 'کاربر با موفقیت حذف شد !')
+
+    res.redirect('/campgrounds')
 }
 
 module.exports.logout = (req, res) => {

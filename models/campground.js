@@ -25,9 +25,7 @@ const campgroundSchema = new Schema({
         }
     },
     images: [ImageSchema],
-    price: Number,
     description: String,
-    location: String,
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User'

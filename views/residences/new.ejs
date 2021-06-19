@@ -1,0 +1,77 @@
+<% layout('layouts/boilerplate') %>
+    <div class="row">
+        <h1 style="direction: rtl;" class="text-center">ملک جدید</h1>
+        <div class="col-6 offset-3">
+
+            <form action="/residences" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+                <div id="map"></div>
+                <pre id="coordinates" class="coordinates"></pre>
+                <div class="mb-3">
+                    <label style="direction: rtl;" class="form-label" for="title">عنوان</label>
+                    <input class="form-control" type="text" name="residence[title]" id="title" required>
+                    <div class="valid-feedback">
+                        بنظر خوب میاد!
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label style="direction: rtl;" class="form-label" for="location"> آدرس</label>
+                    <input class="form-control" type="text" name="residence[location]" id="location" required>
+                    <div class="valid-feedback">
+                        بنظر خوب میاد!
+                    </div>
+                </div>
+                <div class="mb-3" style="display: none;">
+                    <label style="direction: rtl;" class="form-label" for="locationLng">طول جغرافیایی</label>
+                    <input class="form-control" type="text" name="residence[locationLng]" id="locationLng" required>
+                    <label style="direction: rtl;" class="form-label" for="locationLaat">عرض جغرافیایی</label>
+                    <input class="form-control" type="text" name="residence[locationLat]" id="locationLat" required>
+                    <div class="valid-feedback">
+                        بنظر خوب میاد!
+                    </div>
+                </div>
+
+                
+                <div class="mb-3">
+                    <label style="direction: rtl;" class="form-label" for="price">هزینه ملک</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="Price-label">&#65020;</span>
+                        <input type="text" class="form-control" placeholder="0.00" aria-label="Price"
+                            aria-describedby="price-label" id="price" name="residence[price]" required>
+                        <div class="valid-feedback">
+                            بنظر خوب میاد!
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label style="direction: rtl;" class="form-label" for="phoneNumber"> شماره تلفن تماس</label>
+                    <input class="form-control" type="text" name="residence[phoneNumber]" id="phoneNumber" required>
+                    <div class="valid-feedback">
+                        بنظر خوب میاد!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label style="direction: rtl;" class="form-label" for="description">توضیحات</label>
+                    <textarea class="form-control" type="text" name="residence[description]" id="description"
+                        required></textarea>
+                    <div class="valid-feedback">
+                        بنظر خوب میاد!
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="image" class="form-label">انتخاب عکس</label>
+                    <input class="form-control" name="image" type="file" id="image" accept="image/*" multiple>
+                </div>
+                <div class="mb-3">
+                    <button style="direction: rtl;" class="btn btn-success">اضافه کردن ملک</button>
+
+                </div>
+            </form>
+            <a style="direction: rtl;" class="btn btn-outline-info mb-3" href="/residences">تمام ملک ها</a>
+        </div>
+    </div>
+    <script>
+        const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+    </script>
+    <script src="/javascripts/newResidenceMap.js"></script>

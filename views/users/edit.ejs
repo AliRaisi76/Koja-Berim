@@ -24,7 +24,7 @@
 
                 <div style="direction: rtl;" class="mb-3">
                     <label style="direction: rtl;" class="form-label " for="password">رمز عبور</label>
-                    <input class="form-control mb-5" type="password" name="password" id="password" required>
+                    <input class="form-control mb-5" type="password" name="password" id="password" pattern=".{8,}"  required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -64,5 +64,9 @@
                         </div>
                     </div>
                 <% } %>
+                
                 <a class="btn btn-outline-secondary mb-4" href="/users/<%= user._id %> ">بازگشت به صفحه قبل</a>
+            </form>
+            <form action="/users/<%= user._id %>?_method=DELETE" method="POST">
+                <button class="btn btn-outline-success mb-3">حذف کاربر</button>
             </form>

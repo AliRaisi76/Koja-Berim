@@ -1,7 +1,8 @@
-const { campgroundSchema, reviewSchema } = require('./schemas')
+const { campgroundSchema, reviewSchema, residenceSchema } = require('./schemas')
 const ExpressError = require('./utils/ExpressError')
 const Campground = require('./models/campground')
 const Review = require('./models/review')
+const Residence  = require('./models/residence')
 
 
 module.exports.isLoggedIn = (req, res, next) => {
@@ -59,10 +60,25 @@ module.exports.validateReview = (req, res, next) => {
     }
 }
 
-module.exports.isPremium = (req, res, next) => {
-    if (!req.session.prm) {
-        req.session.returnTo = req.originalUrl
-        req.flash('error', 'ابتدا باید  حساب  پرمیوم بخرید!')
-        return res.redirect('/users/premium')
+
+
+module.exports.validateResidence = (req,res,next) => {
+    const { error } = residenceSchema.validate(req.body)
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg,400)
+    } else {
+        next()
     }
+}
+
+
+module.exports.residenceIsAuthor = async (req, res, next) => {
+    const { id } = req.params
+    const residence = await Residence.findById(id)
+    if (!residence.author.equals(req.user._id)) {
+        req.flash('error', 'شما اجازه انجام این کار را ندارید!')
+        return res.redirect(`/residences/${id}`)
+    }
+    next()
 }
