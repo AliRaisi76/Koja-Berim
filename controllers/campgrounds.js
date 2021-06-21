@@ -9,7 +9,6 @@ const User = require('../models/user')
 
 
 module.exports.index = async (req, res) => {
-    console.log(req)
     const campgrounds = await Campground.find({})
     res.render('campgrounds/index', { campgrounds })
 }
@@ -56,7 +55,7 @@ module.exports.showCampground = async (req, res) => {
         }
     }).populate('author')
     if (!campground) {
-        req.flash('error', 'Cannot find that campground')
+        req.flash('error', 'کمپ مورد نظر یافت نشد!')
         return res.redirect('/campgrounds')
     }
     res.render('campgrounds/show', { campground })
@@ -88,7 +87,7 @@ module.exports.updateCampground = async (req, res) => {
     //     req.flash('error', 'مکان مورد نظر پیدا نشد!')
     //     return res.redirect('/campgrounds/new')
     // }
-    campground.geometry.coordinates.push(req.body.campground.locationLng)
+    campground.geometry.coordinates = (req.body.campground.locationLng)
     campground.geometry.coordinates.push(req.body.campground.locationLat)
     // campground.geometry = geoData.body.features[0].geometry
     campground.save()
@@ -105,6 +104,10 @@ module.exports.updateCampground = async (req, res) => {
 
 module.exports.deleteCampground = async (req, res) => {
     const { id } = req.params
+    const campground = await Campground.findById(id) 
+    for (let image of campground.images){
+        await cloudinary.uploader.destroy(image.filename)
+    }
     await Campground.findByIdAndDelete(id)
     req.flash('success', 'کمپ با موفقیت حذف شد !')
 

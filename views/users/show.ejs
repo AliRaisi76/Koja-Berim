@@ -5,17 +5,17 @@
 <h1 class="">اطلاعات کاربر</h1>
 </div>
 <div class="mb-3">
-<h5>نام کاربری: <%= user.username %> <br> ______________________________________________________ </h5>
+<h5>نام کاربری: <%= user.username %> </h5>
+<hr>
 </div>
 <div class="mb-5">
-<h5 class="mb-5">ایمیل: <%= user.email %> <br> __________________________________________________ </h5>
+<h5 class="mb-5">ایمیل: <%= user.email %> </h5>
+<hr>
 </div>
 <form action="/users/<%= user._id %>/edit ">
     <button class="btn btn-outline-success mb-3">ویرایش کاربر</button>
 </form>
-<form action="/users/premium">
-    <button class="btn btn-outline-warning mb-3">پرمیوم</button>
-</form>
+
 
 <h4 class="mb-3 col-6">پست ها: <%= user.campgrounds.length %> پست </h4>
 <% for (let campground of user.campgrounds) { %>

@@ -46,10 +46,6 @@
                     <li style="direction: rtl;" class="list-group-item">
                         ارسال شده توسط:<%= campground.author.username %>
                     </li>
-                    <!-- yadet bashe 3 ta sefre jeloye Toman to bardari -->
-                    <li style="direction: rtl;" class="list-group-item "> هزینه ورود: <%= campground.price %>000
-                            تومان
-                    </li>
                 </ul>
                 <% if(currentUser && campground.author.equals(currentUser._id)) { %>
                     <div style="direction: rtl;" class="card-body">
