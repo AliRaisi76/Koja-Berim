@@ -40,7 +40,7 @@ module.exports.login = (req, res) => {
 
 module.exports.renderUser = async (req, res) => {
     const id = req.params.id
-    const user = await User.findById(id).populate('campgrounds')
+    const user = await User.findById(id).populate('campgrounds').populate('assets')
     res.render('users/show', { user })
 }
 
