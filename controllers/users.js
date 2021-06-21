@@ -4,6 +4,8 @@ const Campground = require('../models/campground')
 const session = require('express-session')
 const express = require('express')
 const app = express()
+const { cloudinary } = require('../cloudinary')
+
 
 
 
@@ -79,6 +81,17 @@ module.exports.updateUser = async (req, res) => {
 
 module.exports.deleteUser = async (req, res) => {
     const { id } = req.params
+    const user = await User.findById(id).populate('campgrounds').populate('assets')
+    for (let campground of user.campgrounds) {
+        for (let image of campground.images) {
+            await cloudinary.uploader.destroy(image.filename)
+        }
+    }
+    for (let asset of user.assets) {
+        for (let image of asset.images) {
+            await cloudinary.uploader.destroy(image.filename)
+        }
+    }
     await User.findByIdAndDelete(id)
     req.flash('success', 'کاربر با موفقیت حذف شد !')
     res.redirect('/campgrounds')

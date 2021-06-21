@@ -9,7 +9,6 @@ const User = require('../models/user')
 
 
 module.exports.index = async (req, res) => {
-    console.log(req)
     const campgrounds = await Campground.find({})
     res.render('campgrounds/index', { campgrounds })
 }

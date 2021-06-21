@@ -48,11 +48,13 @@ UserSchema.post('findOneAndDelete', async function (doc) {
 })
 
 UserSchema.post('findOneAndDelete', async function (doc) {
-    await Campground.deleteMany({
-        _id: {
-            $in: doc.campgrounds
-        }
-    })
+    if (doc) {
+        await Campground.deleteMany({
+            _id: {
+                $in: doc.campgrounds
+            }
+        })
+    }
 })
 
 UserSchema.post('findOneAndDelete', async function (doc) {
