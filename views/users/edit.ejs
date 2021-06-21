@@ -1,24 +1,23 @@
 <% layout('layouts/boilerplate') %>
 
 
-
     <div style="direction: rtl;" class="row">
         <h1 style="direction: rtl;" class="text-center">ویرایش اطلاعات کاربر</h1>
-        <div style="direction: rtl;" class="col-6 offset-3">
+        <div style="direction: rtl; padding-bottom: 10px;" class="col-6 offset-3">
             <form class="validated-form" action="/users/<%= user._id %>?_method=PUT " method="POST" novalidate>
                 <div style="direction: rtl;" class="mb-3">
                     <label style="direction: rtl;" class="form-label" for="username">نام کاربری</label>
                     <input class="form-control" type="text" name="username" id="username" value="<%= user.username %>"
                         required>
                     <div class="valid-feedback">
-                        Looks good!
+                        بنظر خوب میاد!
                     </div>
                 </div>
                 <div style="direction: rtl;" class="mb-3">
                     <label style="direction: rtl;" class="form-label" for="email">ایمیل</label>
                     <input class="form-control" type="email" name="email" id="email" value="<%= user.email %>" required>
                     <div style="direction: rtl;" class="valid-feedback">
-                        Looks good!
+                       بنظر خوب میاد!
                     </div>
                 </div>
 
@@ -26,47 +25,18 @@
                     <label style="direction: rtl;" class="form-label " for="password">رمز عبور</label>
                     <input class="form-control mb-5" type="password" name="password" id="password" pattern=".{8,}"  required>
                     <div class="valid-feedback">
-                        Looks good!
+                        بنظر خوب میاد!
                     </div>
                 </div>
-                <button class="btn btn-success">submit</button>
-
-                <div>
-                    <h5 class="mb-4"> پست های مربوط به <%= user.username %>
-                    </h5>
-                </div>
-                <% for (let campground of user.campgrounds) { %>
-                    <div style="direction: rtl;" class="card mb-3">
-                        <div style="direction: rtl;" class="row">
-                            <div style="direction: rtl;" class="col-md-4">
-                                <img src="<%= campground.images[0].url %> " class="img-fluid" alt="">
-                            </div>
-                            <div style="direction: rtl;" class="col-md-8">
-                                <div style="direction: rtl;" class="card-body">
-                                    <h5 style="direction: rtl;">
-                                        <%= campground.title %>
-                                    </h5>
-                                    <p style="direction: rtl;" class="card-text">
-                                        <%= campground.description %>
-                                    </p>
-                                    <p style="direction: rtl;" class="card-text">
-                                        <small id="location" style="direction: rtl;"
-                                            class="text-muted fa fa-map-marker">
-                                            <%= campground.location %>
-                                        </small>
-                                    </p>
-                                    <a style="direction: rtl;" href="/campgrounds/<%= campground._id%>"
-                                        class="btn btn-sm btn-outline-danger">حذف کردن <%= campground.title %> </a>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                <% } %>
+                <button class="btn btn-success">ویرایش</button>
                 
+            </form>
+        </div>
+            <div>
                 <a class="btn btn-outline-secondary mb-4" href="/users/<%= user._id %> ">بازگشت به صفحه قبل</a>
-            </form>
-            <form action="/users/<%= user._id %>?_method=DELETE" method="POST">
-                <button class="btn btn-outline-success mb-3">حذف کاربر</button>
-            </form>
+                <form action="/users/<%= user._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger mb-3">حذف کاربر</button>
+                </form>
+            </div>
+    </div>
+            

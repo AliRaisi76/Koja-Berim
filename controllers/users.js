@@ -76,16 +76,11 @@ module.exports.updateUser = async (req, res) => {
 }
 
 
-module.exports.renderPremium = (req, res) => {
-    res.render('users/premium')
-}
-
 
 module.exports.deleteUser = async (req, res) => {
     const { id } = req.params
     await User.findByIdAndDelete(id)
     req.flash('success', 'کاربر با موفقیت حذف شد !')
-
     res.redirect('/campgrounds')
 }
 

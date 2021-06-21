@@ -86,7 +86,7 @@ module.exports.updateResidences = async (req, res) => {
     //     return res.redirect('/residences/new')
     // }
     // residence.geometry = geoData.body.features[0].geometry
-    residence.geometry.coordinates.push(req.body.residence.locationLng)
+    residence.geometry.coordinates = (req.body.residence.locationLng)
     residence.geometry.coordinates.push(req.body.residence.locationLat)
     residence.save()
     if (req.body.deleteImages) {
@@ -102,6 +102,10 @@ module.exports.updateResidences = async (req, res) => {
 
 module.exports.deleteResidences = async (req, res) => {
     const { id } = req.params
+    const residence = await Residence.findById(id) 
+    for (let image of residence.images){
+        await cloudinary.uploader.destroy(image.filename)
+    }
     await Residence.findByIdAndDelete(id)
     req.flash('success', ' با موفقیت حذف شد !')
 
