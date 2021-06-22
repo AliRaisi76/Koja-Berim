@@ -1,6 +1,4 @@
 <% layout('layouts/boilerplate') %>
-<div class="row">
-<div class="col-6">
 <div class="mb-5">
 <h1 class="">اطلاعات کاربر</h1>
 </div>
@@ -8,66 +6,61 @@
 <h5>نام کاربری: <%= user.username %> </h5>
 <hr>
 </div>
-<div class="mb-5">
-<h5 class="mb-5">ایمیل: <%= user.email %> </h5>
+<div class="mb-3">
+<h5 class="mb-3">ایمیل: <%= user.email %> </h5>
 <hr>
 </div>
 <form action="/users/<%= user._id %>/edit ">
-    <button class="btn btn-outline-success mb-3">ویرایش کاربر</button>
+    <button class="btn btn-outline-success mb-5">ویرایش کاربر</button>
 </form>
-
-
-<h4 class="mb-3 col-6">پست ها: <%= user.campgrounds.length %> پست </h4>
-<% for (let campground of user.campgrounds) { %>
-    <div style="direction: rtl;" class="card mb-5">
-        <div style="direction: rtl;" class="row">
-            <div style="direction: rtl;" class="col-md-4">
-                <img src="<%= campground.images[0].url %> " class="img-fluid" alt="">
-            </div>
-            <div style="direction: rtl;" class="col-md-8">
-                <div style="direction: rtl;" class="card-body">
-                    <h5 style="direction: rtl;"><%= campground.title %> </h5>
-                    <p style="direction: rtl;" class="card-text"><%= campground.description %> </p>
-                    <p style="direction: rtl;" class="card-text">
-                        <small id="location" style="direction: rtl;" class="text-muted fa fa-map-marker"> <%= campground.location %> </small>
-                    </p>
-                    <a style="direction: rtl;" href="/campgrounds/<%= campground._id%>" class="btn btn-primary">نشان دادن  <%= campground.title %> </a>
-
-                </div>
-            </div> 
-           
-        </div>
-    </div>
-    </div>
-<% } %>
-</div>
-</div>
 
 
 <div class="row">
     <div class="col-6">
-        <h4 class="mb-3 col-6">ملک ها: <%= user.campgrounds.length %> ملک </h4>
+        <h4 class="mb-3">پست ها: <%= user.campgrounds.length %> پست </h4>
+        <% for (let campground of user.campgrounds) { %>
+            <div style="direction: rtl; border-color: brown;" class="card mb-5">
+                <div style="direction: rtl;" class="row">
+                    <div style="direction: rtl;" class="col-md-4">
+                        <img src="<%= campground.images[0].url %> " class="img-fluid" alt="">
+                    </div>
+                    <div style="direction: rtl;" class="col-md-8">
+                        <div style="direction: rtl;" class="card-body">
+                            <h5 style="direction: rtl;"><%= campground.title %> </h5>
+                            <p style="direction: rtl;" class="card-text"><%= campground.description %> </p>
+                            <p style="direction: rtl;" class="card-text">
+                                <small id="location" style="direction: rtl;" class="text-muted fa fa-map-marker"> <%= campground.location %> </small>
+                            </p>
+                            <a style="direction: rtl;" href="/campgrounds/<%= campground._id%>" class="btn btn-primary">نشان دادن  <%= campground.title %> </a>
+                        </div>
+                    </div> 
+                   
+                </div>
+            </div>
+        <% } %>
+    </div>
+    <div class="col-6">
+        <h4 class="mb-3">ملک ها: <%= user.assets.length %> ملک </h4>
         <% for (let asset of user.assets) { %>
-            <div style="direction: rtl;" class="card mb-5">
+            <div style="direction: rtl; border-color: chartreuse;" class="card mb-5">
                 <div style="direction: rtl;" class="row">
                     <div style="direction: rtl;" class="col-md-4">
                         <img src="<%= asset.images[0].url %> " class="img-fluid" alt="">
                     </div>
                     <div style="direction: rtl;" class="col-md-8">
                         <div style="direction: rtl;" class="card-body">
-                            <h5 style="direction: rtl;"><%= user.title %> </h5>
+                            <h5 style="direction: rtl;"><%= asset.title %> </h5>
                             <p style="direction: rtl;" class="card-text"><%= asset.description %> </p>
                             <p style="direction: rtl;" class="card-text">
                                 <small id="location" style="direction: rtl;" class="text-muted fa fa-map-marker"> <%= asset.location %> </small>
                             </p>
                             <a style="direction: rtl;" href="/residences/<%= asset._id%>" class="btn btn-primary">نشان دادن  <%= asset.title %> </a>
-        
                         </div>
                     </div> 
                    
                 </div>
             </div>
-            </div>
         <% } %>
     </div>
 </div>
+
