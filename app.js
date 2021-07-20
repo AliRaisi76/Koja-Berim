@@ -28,6 +28,7 @@ const campgroundRoutes = require('./routes/campgrounds')
 const reviewRoutes = require('./routes/reviews')
 const { serializeUser } = require('passport')
 const { contentSecurityPolicy } = require('helmet')
+const { Cookie } = require('express-session')
 
 
 // connecting the database to the uri or url of our app 
@@ -80,6 +81,8 @@ const sessionCofig = {
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
 }
+
+
 
 
 app.use(session(sessionCofig))
