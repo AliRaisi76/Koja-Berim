@@ -23,13 +23,11 @@ const seedDB = async () => {
   // await Campground.deleteMany({})
   for (let i = 0; i < 20; i++) {
     const random1000 = Math.floor(Math.random() * 1000)
-    const price = Math.floor(Math.random() * 20) + 10
     const camp = new Campground({
-      author: '60c91e58a8a149090ce208e1',
+      author: '60d22879516ae909f04faa19',
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
-      title: `${sample(descriptors)}, ${sample(places)}  `,
+      title: `${sample(descriptors)} ${sample(places)}  `,
       description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam sunt ullam vero officia corrupti recusandae dolor maiores. Animi, sequi, repudiandae commodi corrupti aspernatur in aliquid, iusto et nulla blanditiis ab.',
-      price,
       geometry: {
         "coordinates": [
           cities[random1000].longitude,
@@ -39,20 +37,12 @@ const seedDB = async () => {
       },
       images: [
         {
-          url: 'https://res.cloudinary.com/dsocdtkbf/image/upload/v1622978722/Koja_Berim/hpdcazo8cfhfhscxnfix.jpg',
-          filename: 'Koja_Berim/hpdcazo8cfhfhscxnfix'
-        },
-        {
-          url: 'https://res.cloudinary.com/dsocdtkbf/image/upload/v1622978725/Koja_Berim/bs74g8tgyzrqkrfyguux.jpg',
-          filename: 'Koja_Berim/bs74g8tgyzrqkrfyguux'
-        },
-        {
-          url: 'https://res.cloudinary.com/dsocdtkbf/image/upload/v1622978729/Koja_Berim/dhcqlkclpcm8rz9di1if.jpg',
-          filename: 'Koja_Berim/dhcqlkclpcm8rz9di1if'
+          url: 'https://res.cloudinary.com/dsocdtkbf/image/upload/v1624385264/Koja_Berim/p9et19jlhtr0qkflkxow.jpg',
+          filename: 'Koja_Berim/p9et19jlhtr0qkflkxow'
         }
       ]
     })
-    const user = await User.findById('60c91e58a8a149090ce208e1')
+    const user = await User.findById('60d22879516ae909f04faa19')
     user.campgrounds.push(camp._id)
     
 

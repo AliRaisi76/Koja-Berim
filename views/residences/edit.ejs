@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div style="direction: rtl;" class="mb-3">
-                    <label style="direction: rtl;" class="form-label" for="location">مکان</label>
+                    <label style="direction: rtl;" class="form-label" for="location">آدرس</label>
                     <input class="form-control" type="text" name="residence[location]" id="location"
                         value="<%= residence.location %>" required>
                     <div style="direction: rtl;" class="valid-feedback">
@@ -27,9 +27,9 @@
                 </div>
                 <div class="mb-3" style="display: none;">
                     <label style="direction: rtl;" class="form-label" for="locationLng">طول جغرافیایی</label>
-                    <input class="form-control" type="text" name="residence[locationLng]" id="locationLng" value="<%= residence.locationLng %> " required>
+                    <input class="form-control" type="text" name="residence[locationLng]" id="locationLng" value="<%= residence.geometry.coordinates[0] %> " required>
                     <label style="direction: rtl;" class="form-label" for="locationLaat">عرض جغرافیایی</label>
-                    <input class="form-control" type="text" name="residence[locationLat]" id="locationLat" value="<%= residence.locationLat %> " required>
+                    <input class="form-control" type="text" name="residence[locationLat]" id="locationLat" value="<%= residence.geometry.coordinates[1] %> " required>
                     <div class="valid-feedback">
                         بنظر خوب میاد!
                     </div>

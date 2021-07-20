@@ -9,6 +9,7 @@ ImageSchema.virtual('thumbnail').get(function () {
     return this.url.replace('/upload', '/upload/w_200')
 })
 
+
 const opts = { toJSON: { virtuals: true } }
 const residenceSchema = new Schema({
     title: String,
@@ -26,7 +27,7 @@ const residenceSchema = new Schema({
     images: [ImageSchema],
     price: Number,
     description: String,
-    phoneNumber:Number,
+    phoneNumber: Number,
     location: String,
     author: {
         type: Schema.Types.ObjectId,
@@ -34,10 +35,13 @@ const residenceSchema = new Schema({
     }
 }, opts)
 
+
+
 residenceSchema.virtual('properties.popUpMarkup').get(function () {
     return `
     <strong><a href="/residences/${this._id}">${this.title}</a></strong>
-    <p>${this.description.substring(0,20)}...</p>`
+    <p>${this.description.substring(0, 20)}...</p>`
 })
 
 module.exports = mongoose.model('Residence', residenceSchema)
+

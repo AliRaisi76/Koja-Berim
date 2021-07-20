@@ -18,17 +18,9 @@ module.exports.renderNewForm = (req, res) => {
 
 
 module.exports.createResidence = async (req, res, next) => {
-    // const geoData = await geocoder.reverseGeocode({
-    //     query: req.body.campground.location,
-    //     limit: 1
-    // }).send()
+
     const residence = new Residence(req.body.residence)
-    // error handling baraye peida nashodane makan
-    // if(!geoData.body.features[0]){
-    //     req.flash('error', 'مکان مورد نظر پیدا نشد!')
-    //     return res.redirect('/campgrounds/new')
-    // }
-    // campground.geometry = geoData.body.features[0].geometry
+
     residence.geometry.coordinates.push(req.body.residence.locationLng)
     residence.geometry.coordinates.push(req.body.residence.locationLat)
     residence.images = req.files.map(f => ({ url: f.path, filename: f.filename }))
@@ -50,6 +42,7 @@ module.exports.createResidence = async (req, res, next) => {
 
 module.exports.showResidence = async (req, res) => {
     const residence = await Residence.findById(req.params.id).populate('author')
+    console.log(residence)
     if (!residence) {
         req.flash('error', 'قادر به پیدا کردن ملک مورد نظر نمیباشد!')
         return res.redirect('/residences')
@@ -76,16 +69,7 @@ module.exports.updateResidences = async (req, res) => {
     const residence = await Residence.findByIdAndUpdate(id, { ...req.body.residence })
     const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }))
     residence.images.push(...imgs)
-    // const geoData = await geocoder.forwardGeocode({
-    //     query: req.body.campground.location,
-    //     limit: 1
-    // }).send()
-    // error handling baraye peida nashodane makan
-    // if(!geoData.body.features[0]){
-    //     req.flash('error', 'مکان مورد نظر پیدا نشد!')
-    //     return res.redirect('/residences/new')
-    // }
-    // residence.geometry = geoData.body.features[0].geometry
+
     residence.geometry.coordinates = (req.body.residence.locationLng)
     residence.geometry.coordinates.push(req.body.residence.locationLat)
     residence.save()

@@ -4,6 +4,7 @@ const mapBoxToken = process.env.MAPBOX_TOKEN
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken })
 const { cloudinary } = require('../cloudinary')
 const User = require('../models/user')
+const Residence = require('../models/residence')
 
 
 
@@ -104,8 +105,8 @@ module.exports.updateCampground = async (req, res) => {
 
 module.exports.deleteCampground = async (req, res) => {
     const { id } = req.params
-    const campground = await Campground.findById(id) 
-    for (let image of campground.images){
+    const campground = await Campground.findById(id)
+    for (let image of campground.images) {
         await cloudinary.uploader.destroy(image.filename)
     }
     await Campground.findByIdAndDelete(id)

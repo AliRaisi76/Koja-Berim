@@ -19,9 +19,9 @@
                 </div>
                 <div class="mb-3" style="display: none;">
                     <label style="direction: rtl;" class="form-label" for="locationLng">طول جغرافیایی</label>
-                    <input class="form-control" type="text" name="campground[locationLng]" id="locationLng" value="<%= campground.locationLng %> " required>
+                    <input class="form-control" type="text" name="campground[locationLng]" id="locationLng" value="<%= campground.geometry.coordinates[0] %> " required>
                     <label style="direction: rtl;" class="form-label" for="locationLaat">عرض جغرافیایی</label>
-                    <input class="form-control" type="text" name="campground[locationLat]" id="locationLat" value="<%= campground.locationLat %> " required>
+                    <input class="form-control" type="text" name="campground[locationLat]" id="locationLat" value="<%= campground.geometry.coordinates[1] %> " required>
                     <div class="valid-feedback">
                         بنظر خوب میاد!
                     </div>
